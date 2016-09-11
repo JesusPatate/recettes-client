@@ -21,8 +21,6 @@
   "homepage": "https://github.com/JesusPatate/recettes#readme",
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-nodeunit": "^1.0.0",
-    "grunt-contrib-uglify": "^2.0.0"
+    "grunt-shell": "^1.3.1"
   }
 }
