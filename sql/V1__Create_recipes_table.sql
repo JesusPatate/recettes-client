@@ -1,5 +1,6 @@
 CREATE TYPE courseType AS ENUM ('hot', 'cold');
 
+-- Information specific to the recipes and the corresponding courses
 CREATE TABLE recipes (
 	id SERIAL PRIMARY KEY,
 	title text,
