@@ -1,26 +1,27 @@
 {
-  "name": "recettes",
-  "version": "1.0.0",
-  "description": "Recueil de recettes",
-  "main": "app.js",
+  "name": "recipes",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JesusPatate/recettes.git"
-  },
-  "keywords": [
-    "recipes"
-  ],
-  "author": "JesusPatates",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/JesusPatate/recettes/issues"
-  },
-  "homepage": "https://github.com/JesusPatate/recettes#readme",
+  "author": "G. Gautier",
+  "license": "ISC",
   "devDependencies": {
+    "axios": "^0.16.1",
+    "babel-preset-es2015": "^6.24.1",
     "grunt": "^1.0.1",
-    "grunt-shell": "^1.3.1"
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "uuidjs": "^3.5.3",
+    "vue": "^2.3.4"
+  },
+  "dependencies": {
+    "bulma": "^0.4.2",
+    "mdi": "^2.0.46"
   }
 }

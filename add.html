@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <title>Recipes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+  </head>
+  <body>
+    <div class="hero is-light">
+
+      <header class="hero-head">
+        <div class="nav">
+          <div class="nav-center">
+            <span class="nav-item"">
+              <h1 class="title">>> RECIPES <<</h1>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-body">
+        <div class="container">
+
+          <nav class="columns is-mobile">
+            <div class="column is-hidden-mobile"></div>
+            <div class="column is-narrow-tablet">
+              <a class="nav-item is-tab" href="index.html">
+                Accueil
+              </a>
+            </div>
+            <div class="column is-narrow-tablet">
+              <a class="nav-item is-tab is-active" href="add.html">
+                Ajouter une recette
+              </a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+          </nav>
+
+          <section id="recipe-form">
+            <form>
+              <div class="field">
+                <label class="label" for="inputName">Titre : </label>
+                <p class="control">
+                  <input class="input" type="text" id="inputName" v-model="recipe.title">
+                </p>
+              </div>
+              
+              <div class="field">
+                <label class="label">Catégories : </label>
+                <p class="control is-unselectable">
+                  <label class="radio">
+                    <input class="checkbox" type="checkbox" id="hot" v-model="recipe.hot">
+                    Plat chaud
+                  </label>
+
+                  <label class="radio">
+                    <input class="checkbox" type="checkbox" id="dessert" v-model="recipe.dessert">
+                    Dessert
+                  </label>
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label" for="preparationTime">Temps de préparation : </label>
+                <div class="field has-addons">
+                  <p class="control">
+                    <input class="input" type="number" id="preparationTime" min="1" value="1" v-model="recipe.preparationTime">
+                  </p>
+
+                  <p class="control">
+                    <span class="select">
+                      <select id="selectPrepTime">
+                        <option>minutes</option>
+                        <option>heures</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="cookingTime">Temps de cuisson : </label>
+                <div class="field has-addons">
+                  <p class="control">
+                    <input class="input" type="number" id="cookingTime" min="0" v-model="recipe.cookingTime">
+                  </p>
+
+                  <p class="control">
+                    <span class="select">
+                      <select>
+                        <option>minutes</option>
+                        <option>heures</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="inputServings">Nombre de portions : </label>
+                <p class="control">
+                  <input class="input" type="number" id="inputServings" min="1" value="1" v-model="recipe.servings">
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">Ingredients : </label>
+                <div class="field">
+                  <template  v-for="(item, index) of recipe.ingredients">
+                    <div class="columns">
+                      <div class="column">
+                        <p class="control">
+                          <input class="input" type="text" :id="'ingredient' + index" placeholder="Nom" v-model="item.name">
+                        </p>
+                      </div>
+
+                      <div class="column">
+                        <p class="control">
+                          <input class="input" type="number" :id="'amount' + index" min="1" placeholder="Quantité" v-model="item.amount">
+                        </p>
+                      </div>
+
+                      <div class="column">
+                        <p class="control">
+                          <span class="select is-fullwidth">
+                            <select v-model="item.unit" :id="'unit' + index">
+                              <option v-for="unit of units" :value="unit.id">{{unit.name}}</option>
+                            </select>
+                          </span>
+                        </p>
+                      </div>
+
+                      <div class="column">
+                        <p class="control">
+                          <a class="button is-light" @click="removeIngredient(index)">
+                            <span class="icon is-small">
+                              <i class="delete"></i>
+                            </span>
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+
+                <div class="field">
+                  <div class="columns">
+                    <div class="column">
+                      <p class="control">
+                        <input class="input" type="text" placeholder="Nom" v-model="newIngredient.name">
+                      </p>
+                    </div>
+
+                    <div class="column">
+                      <p class="control">
+                        <input class="input" type="number" min="0" step="any" placeholder="Quantité" v-model="newIngredient.amount">
+                      </p>
+                    </div>
+
+                    <div class="column">
+                      <p class="control">
+                        <span class="select is-fullwidth">
+                          <select v-model="newIngredient.unit">
+                            <option value="" disabled selected>Unité</option>
+                              <option v-for="unit of units" :value="unit.id">{{unit.name}}</option>
+                          </select>
+                        </span>
+                      </p>
+
+                    </div>
+                    <div class="column">
+                      <p class="control">
+                        <input type="button" class="button is-primary" id="btnAddIngredient" value="Ajouter" @click.prevent="addIngredient">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="source">Source : </label>
+                <p class="control">
+                  <input class="input" type="text" id="source" v-model="recipe.source">
+                </p>
+              </div>
+
+              <div class="field">
+                <p class="control">
+                  <input type="button" class="button is-primary" id="btnSubmit" value="Ajouter la recette" @click="sendRecipe">
+                </p>
+              </div>
+            </form>
+          </section>
+    </div>
+
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+    <script src="node_modules/uuidjs/dist/uuid.core.js"></script>
+    <script src="src/recipe_form.js"></script>
+  </body>
+</html>

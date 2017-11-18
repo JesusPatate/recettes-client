@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <title>Recipes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+    <link href="node_modules/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="assets/css/index.css">
+  </head>
+  <body>
+    <div class="hero is-light">
+
+      <header class="hero-head">
+        <div class="nav">
+          <div class="nav-center">
+            <span class="nav-item"">
+              <h1 class="title">>> RECIPES <<</h1>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-body">
+        <div class="container">
+
+          <nav class="columns is-mobile">
+            <div class="column is-hidden-mobile"></div>
+            <div class="column is-narrow-tablet">
+              <a class="nav-item is-tab is-active" href="index.html">
+                Accueil
+              </a>
+            </div>
+            <div class="column is-narrow-tablet">
+              <a class="nav-item is-tab" href="add.html">
+                Ajouter une recette
+              </a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+          </nav>
+
+          <section id="recipe-list">
+            <div class="columns" v-for="recipe in recipes">
+              <div class="column is-8 is-offset-2">
+                <article class="panel">
+                  <header class="panel-heading">
+                    <div class="columns is-mobile">
+                      <div class="column">
+                        <h3 >{{recipe.title}}</h3>
+                      </div>
+                      <div class="column is-narrow">
+                        <div class="buttons">
+                          <!-- <a class="button is-primary is-outlined" title="Sélectionner">
+                            <span class="icon">
+                              <i class="mdi mdi-check-circle"></i>
+                            </span>
+                          </a> -->
+                          <a class="button is-danger is-outlined" @click="deleteRecipe(recipe);" title="Supprimer">
+                            <span class="icon">
+                              <i class="mdi mdi-delete-forever"></i>
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </header>
+                  <section class="panel-block">
+                    <div class="content">
+                      <ul>
+                        <li>Plat chaud : <input type="checkbox" :checked="recipe.hot" disabled></li>
+                        <li>Dessert : <input type="checkbox" :checked="recipe.dessert" disabled></li>
+                        <li>Temps de préparation : {{recipe.preparationTime}} minutes</li>
+                        <li v-if="recipe.cookingTime">Temps de cuisson : {{recipe.cookingTime}} minutes</li>
+                        <li>Nombre de portions : {{recipe.servings}}</li>
+                        <li>
+                          Ingrédients :
+                          <ul>
+                            <li v-for="item in recipe.ingredients">
+                              {{item.name}}
+                              <span v-if="item.amount">
+                                ({{item.amount}}<span v-if="item.unit"> {{item.unit.name}}</span>)
+                              </span>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>Source : {{recipe.source}}</li>
+                        <li v-if="recipe.comments">
+                          Commentaires :
+                          <ul>
+                            <li v-for="item in recipe.comments">{{item}}</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </section>
+                </article>
+              </div>
+            </div>
+
+          </section>
+
+        </div>
+      </section>
+    </div>
+
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+    <script src="node_modules/uuidjs/dist/uuid.core.js"></script>
+    <script src="src/recipe_list.js"></script>
+  </body>
+</html>

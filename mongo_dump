@@ -1,0 +1,31 @@
+{ 
+    "_id" : "592071e7d8e07312ac5ffbdf", 
+    "id" : "890716fe-fba4-4182-9cbb-4ebe2b50bc69", 
+    "title" : "Fusillis à la sardine", 
+    "hot" : true, 
+    "dessert" : false, 
+    "preparationTime" : 10, 
+    "cookingTime" : 15, 
+    "servings" : 4, 
+    "ingredients" : [ 
+        { "name" : "Mandarines", "amount" : 2 }, 
+        { "name" : "Pignons", "amount" : 30, "unit" : "grammes" },
+        { "name" : "Fusillis", "amount" : 300, "unit" : "grammes" },
+        { "name" : "Sardines à l'huile d'olive", "amount" : 2, "unit" : "boîtes" }, 
+        { "name" : "Raisins secs", "amount" : 30, "unit" : "grammes" }, 
+        { "name" : "Sel", "amount" : 0 }, 
+        { "name" : "Poivre", "amount" : 0 } 
+    ], 
+    "comments" : [ ], 
+    "source" : "Simplissime (p. 90)" 
+}
+
+{ "_id" : "59370ebe78bd3c55bb1acc90", "id" : "6ae180e4-fbd8-4cdd-ae82-6ec255b87235", "title" : "Cookies pistache cerise", "hot" : false, "dessert" : true, "preparationTime" : 75, "cookingTime" : 10, "servings" : 4, "ingredients" : [ { "name" : "Cerises confites", "amount" : 100, "unit" : "grammes" }, { "name" : "Pistaches mondées", "amount" : 50, "unit" : "grammes" }, { "name" : "Beurre mou", "amount" : 100, "unit" : "grammes" }, { "name" : "Sucre", "amount" : 50, "unit" : "grammes" }, { "name" : "Farine", "amount" : 100, "unit" : "grammes" } ], "comments" : [ ], "source" : "Simplissime (p.354)" }
+
+{ "_id" : "5937287378bd3c55bb1acf8e", "id" : "13420b4b-36ee-49a6-9417-0ea89be6755e", "title" : "Verrine d'avocat, oeuf dur et surimi", "hot" : false, "dessert" : false, "preparationTime" : 15, "cookingTime" : 10, "servings" : 4, "ingredients" : [ { "name" : "Avocats", "amount" : 2, "unit" : "" }, { "name" : "Citron", "amount" : 1, "unit" : "unités" }, { "name" : "Crème épaisse", "amount" : 5, "unit" : "centilitres" }, { "name" : "Oeufs", "amount" : 2, "unit" : "unités" }, { "name" : "Bâtonnets de surimi", "amount" : 8, "unit" : "unités" }, { "name" : "Tabasco", "amount" : 0, "unit" : "" } ], "comments" : [ ], "source" : "SOS porte-monnaie en détresse (p.31)" }
+
+{ "_id" : "593ae36bb6d3d293d1d49c58", "id" : "970ae456-23af-40e6-b34a-b764ef040181", "title" : "Émincé de poulet au citron facile", "hot" : true, "dessert" : false, "preparationTime" : 15, "cookingTime" : 10, "servings" : 2, "ingredients" : [ { "name" : "Blancs de poulet", "amount" : 2, "unit" : "unités" }, { "name" : "Citrons", "amount" : 2, "unit" : "unités" }, { "name" : "Oignons", "amount" : 1, "unit" : "unités" }, { "name" : "Paprika", "amount" : 0, "unit" : "" }, { "name" : "Piment en poudre", "amount" : 0, "unit" : "" } ], "comments" : [ ], "source" : "Marmiton - Ça change des coquillettes (p.52)" }
+
+{ "_id" : "593ae466b6d3d293d1d49c76", "id" : "8df59ded-a19d-4db0-a6ea-f164d1112ab9", "title" : "Crevettes au curry express", "hot" : true, "dessert" : false, "preparationTime" : 15, "cookingTime" : 5, "servings" : 2, "ingredients" : [ { "name" : "Crevettes roses", "amount" : 300, "unit" : "unités" }, { "name" : "Crème fraîche", "amount" : 15, "unit" : "centilitres" }, { "name" : "Curry", "amount" : 2, "unit" : "cuillères à café" } ], "comments" : [ ], "source" : "Marmiton - Ça change des coquillettes (p. 37)" }
+
+{ "_id" : "593ae600b6d3d293d1d49ca2", "id" : "bca4e5b6-8612-4bef-ba4a-20838e73f1f9", "title" : "Sauté de dinde au paprika", "hot" : true, "dessert" : false, "preparationTime" : 10, "cookingTime" : 20, "servings" : 4, "ingredients" : [ { "name" : "Escalopes de dinde", "amount" : 4, "unit" : "unités" }, { "name" : "Poivron rouge", "amount" : 1, "unit" : "unités" }, { "name" : "Citron", "amount" : 1, "unit" : "unités" }, { "name" : "Oignons", "amount" : 2, "unit" : "unités" }, { "name" : "Crème liquide", "amount" : 25, "unit" : "centilitres" }, { "name" : "Paprika doux", "amount" : 1, "unit" : "cuillères à soupe" }, { "name" : "Huile d'olive", "amount" : 0, "unit" : "" } ], "comments" : [ ], "source" : "Marmiton - Ça change des coquillettes (p. 80)" }
