@@ -1,57 +1,52 @@
 import axios from 'axios';
-import notyf from 'js/Notyf.js';
 import config from 'config';
 
 export default class RecettesApiClient {
-  getRecipes() {
-    const recipes = [];
-
+  getRecipes(success = function() {}, failure = function() {}) {
     axios.get(config.apiUrl + '/recipes')
       .then((response) => {
-        response.data.map(recipe => recipes.push(recipe));
-
-        if (recipes.length === 0) {
-          notyf.alert("Aucune recette trouvée");
-        }
+        success(response.data);
       })
       .catch((error) => {
         console.error("Failed to fetch recipes from server : " + error);
+        failure(error);
       });
-
-    return recipes;
   }
 
-  getUnits() {
+  getUnits(success = function() {}, failure = function() {}) {
     let units = [];
 
     axios.get(config.apiUrl + '/units', this.recipe)
       .then((response) => {
-        response.data.map(unit => units.push(unit));
+        success(response.data);
       })
       .catch(function (error) {
         console.error("Failed to fetch units from server : " + error);
+        failure(error);
       });
 
     return units;
   }
 
-  saveRecipe(recipe, callback = () => {}) {
+  saveRecipe(recipe, success = function() {}, failure = function() {}) {
     axios.put(config.apiUrl + '/recipes', recipe)
       .then((response) => {
-        callback();
+        success();
       })
       .catch(function (error) {
         console.error("Failed to save recipe : " + error);
+        failure(error);
       });
   }
 
-  deleteRecipe(id, callback = () => {}) {
+  deleteRecipe(id, success = function() {}, failure = function() {}) {
     axios.delete(config.apiUrl + '/recipes/' + id)
       .then((response) => {
-        callback();
+        success();
       })
       .catch((error) => {
         console.error(error);
+        failure(error);
       });
   }
 }

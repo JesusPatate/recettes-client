@@ -133,6 +133,7 @@
   import Recipe from 'js/Recipe.js';
   import Ingredient from 'js/Ingredient.js';
   import RecettesApiClient from 'js/RecettesApiClient.js';
+  import notyf from 'js/Notyf.js';
 
   const initRecipe = function() {
     const recipe = new Recipe();
@@ -175,14 +176,22 @@
       },
 
       sendRecipe() {
-        this.apiClient.saveRecipe(this.recipe, () => {
-          this.recipe = initRecipe();
-        });
+        const vm = this;
+
+        this.apiClient.saveRecipe(this.recipe,
+          function() {
+            notyf.confirm("Recette \"" + vm.recipe.title + "\" ajoutée.");
+            vm.recipe = initRecipe();
+          },
+          function() {
+            notyf.alert('Erreur lors de la création de la recette');
+          }
+        );
       }
     },
 
     mounted() {
-      this.units = this.apiClient.getUnits();
+      this.apiClient.getUnits(units => this.units = units);
     }
   }
 </script>
