@@ -13,7 +13,7 @@
     "axios": "^0.16.1",
     "bulma": "^0.4.2",
     "mdi": "^2.0.46",
-    "notyf": "^2.0.1",
+    "notyf": "git+https://github.com/JesusPatate/notyf.git",
     "uuidjs": "^3.5.3",
     "vue": "^2.4.4"
   },
