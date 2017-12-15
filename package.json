@@ -1,20 +1,40 @@
 {
   "name": "recettes-client",
-  "version": "0.1.0",
-  "description": "",
-  "main": "index.html",
+  "description": "A Vue.js project",
+  "version": "1.0.0",
+  "author": "JesusPatate <gg.jesuspatate@orange.fr>",
+  "license": "GPL-3.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Jesuspatate",
-  "license": "ISC",
-  "devDependencies": {
-    "axios": "^0.16.1",
-    "uuidjs": "^3.5.3",
-    "vue": "^2.3.4"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "bulma": "^0.4.2",
-    "mdi": "^2.0.46"
+    "mdi": "^2.0.46",
+    "notyf": "^2.0.1",
+    "uuidjs": "^3.5.3",
+    "vue": "^2.4.4"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   }
 }
