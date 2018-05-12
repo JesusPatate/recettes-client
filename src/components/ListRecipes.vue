@@ -2,32 +2,37 @@
   <div>
     <div class="columns" v-for="recipe in recipes">
       <app-recipe :recipe="recipe">
-        <a class="button is-success is-outlined" @click="notAvailable()" title="Sélectionner">
-          <span class="icon">
-            <i class="mdi mdi-check-circle"></i>
-          </span>
-        </a>
-
-        <a class="button is-info is-outlined" @click="notAvailable()" title="Éditer">
+        <p class="control">
+          <a class="button is-success is-outlined" @click="notAvailable()" title="Sélectionner">
+            <span class="icon">
+              <i class="mdi mdi-check-circle"></i>
+            </span>
+          </a>
+        </p>
+        <p class="control">
+          <a class="button is-info is-outlined" @click="editRecipe(recipe)" title="Éditer">
           <span class="icon">
             <i class="mdi mdi-pencil"></i>
           </span>
         </a>
-
-        <a class="button is-danger is-outlined" @click="deleteRecipe(recipe);" title="Supprimer">
+        </p>
+        <p class="control">
+          <a class="button is-danger is-outlined" @click="deleteRecipe(recipe);" title="Supprimer">
           <span class="icon">
             <i class="mdi mdi-delete-forever"></i>
           </span>
         </a>
+        </p>
       </app-recipe>
     </div>
   </div>
 </template>
 
 <script>
-  import notyf from 'js/Notyf.js';
-  import RecettesApiClient from 'js/RecettesApiClient.js';
   import Recipe from './Recipe.vue';
+  import RecettesApiClient from 'js/presentation/RecettesApiClient.js';
+  import RecipeManagementService from 'js/application/RecipeManagementService.js';
+  import notyf from 'js/notyf.js';
 
   export default {
     components: {
@@ -36,6 +41,7 @@
 
     data() {
       return {
+        recipeMgmtService: new RecipeManagementService(),
         apiClient: new RecettesApiClient(),
         recipes: [],
         message: null
@@ -46,7 +52,7 @@
       loadRecipes() {
         const vm = this;
 
-        this.apiClient.getRecipes(
+        this.recipeMgmtService.getRecipes(
           function(recipes) {
             vm.recipes = recipes;
 
@@ -62,6 +68,10 @@
 
       notAvailable() {
         notyf.alert('Fonctionnalité non disponible pour le moment');
+      },
+
+      editRecipe(recipe) {
+          this.$emit('editRecipe', recipe);
       },
 
       deleteRecipe(recipe) {

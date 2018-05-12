@@ -2,7 +2,7 @@ import UUID from 'uuidjs';
 
 export default class Recipe {
   constructor(
-      id = UUID.generate(),
+      id = null,
       title = '',
       hot = false,
       dessert = false,

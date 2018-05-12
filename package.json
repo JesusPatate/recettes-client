@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "bulma": "^0.4.2",
+    "bulma": "^0.6.2",
     "mdi": "^2.0.46",
     "notyf": "git+https://github.com/JesusPatate/notyf.git",
     "uuidjs": "^3.5.3",

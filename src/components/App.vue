@@ -1,54 +1,47 @@
 <template>
-  <div class="hero is-light">
+  <div class="hero is-light is-fullheight">
     <app-header></app-header>
 
     <div class="hero-body">
       <div class="container">
-        <app-menu @listRecipes="listRecipes()" @addRecipe="addRecipe()"></app-menu>
-
-        <section id="recipe-list" v-if="displayRecipes">
-          <app-recipes></app-recipes>
-        </section>
-
-        <section id="recipe-form" v-if="displayEditForm">
-          <app-recipe-form></app-recipe-form>
-        </section>
+        <app-recipes></app-recipes>
+        <app-recipe-form :show="showAddRecipeModal" @close="showAddRecipeModal = false"></app-recipe-form>
+        <button id="addRecipeBtn" class="button is-outlined is-success" title="Ajouter une recette" @click="showAddRecipeModal = true">+</button>
       </div>
     </div>
   </div>
 </template>
 
+<style scoped>
+  #addRecipeBtn {
+    position: fixed;
+    bottom: 1em;
+    right: 1em; 
+  }
+</style>
+
 <script>
   import 'bulma';
   import 'assets/css/index.css';
   import Header from './Header.vue';
-  import Menu from './Menu.vue';
   import ListRecipes from './ListRecipes.vue';
-  import EditForm from './EditForm.vue';
+  import EditForm from './EditForm2.vue';
 
   export default {
     components: {
       'app-header': Header,
-      'app-menu': Menu,
       'app-recipes': ListRecipes,
       'app-recipe-form': EditForm
     },
+
     data() {
       return {
-        displayRecipes: true,
-        displayEditForm: false
+        showAddRecipeModal: false
       };
     },
-    methods: {
-      listRecipes() {
-        this.displayRecipes = true;
-        this.displayEditForm = false;
-      },
 
-      addRecipe() {
-        this.displayRecipes = false;
-        this.displayEditForm = true;
-      }
+    methods: {
+
     }
   }
 </script>

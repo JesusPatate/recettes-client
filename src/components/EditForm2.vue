@@ -1,11 +1,20 @@
 <template>
-  <form>
-    <div class="field">
-      <label class="label" for="inputName">Titre : </label>
-      <p class="control">
-        <input class="input" type="text" id="inputName" v-model="recipe.title">
-      </p>
-    </div>
+  <div class="modal" :class="{'is-active': show}">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Ajouter une recette</p>
+        <button class="delete" aria-label="close" @click="discard"></button>
+      </header>
+      <section class="modal-card-body">
+        <app-notifications :messages="notifications"></app-notifications>
+        <form>
+          <div class="field">
+            <label class="label" for="inputName">Titre : </label>
+            <p class="control">
+              <input class="input" type="text" id="inputName" v-model="recipe.title">
+            </p>
+          </div>
     
     <div class="field">
       <label class="label">Catégories : </label>
@@ -122,56 +131,43 @@
 
     <div class="field">
       <p class="control">
-        <input type="button" class="button is-primary" id="btnSubmit" value="Valider" @click="saveRecipe">
+        <!-- <input type="button" class="button is-primary" id="btnSubmit" value="Valider" > -->
       </p>
     </div>
-  </form>
+        </form>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" @click="save">Ajouter</button>
+        <button class="button" @click="discard">Annuler</button>
+      </footer>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-  #btnSubmit {
-    margin-top: 0.75rem;
-  }
-</style>
-
 <script>
-  import Ingredient from 'js/model/Ingredient.js';
   import Recipe from 'js/model/Recipe.js';
+  import Ingredient from 'js/model/Ingredient.js';
+  import Notifications from './Notifications.vue';
   import RecipeManagementService from 'js/application/RecipeManagementService.js';
   import UnitManagementService from 'js/application/UnitManagementService.js';
   import notyf from 'js/notyf.js';
 
-  /**
-   * Retrieves a unit from its identifier.
-   *
-   * @param id The identifier of the unit
-   * @param units Available units
-   */
-  function getUnit(id, units) {
-    for (let index in units) {
-      const unit = units[index];
-
-      if (unit.id == id) {
-        return unit;
-      }
-    }
-
-    return null;
-  }
-
   export default {
+    components: {
+      'app-notifications': Notifications,
+    },
+
     props: {
-      recipe: {
-        type: Object,
-        required: true
-      }
+      show: false
     },
 
     data() {
       return {
+        recipe: new Recipe(),
+        units: [],
         recipeMgmtService: new RecipeManagementService(),
         unitMgmtService: new UnitManagementService(),
-        units: []
+        notifications: []
       };
     },
 
@@ -209,23 +205,29 @@
         this.recipe.ingredients[index].unit = getUnit(unitId, this.units);
       },
 
-      /**
-       * Saves the recipe.
-       */
-      saveRecipe() {
+      save() {
         const vm = this;
+
         this.recipeMgmtService.saveRecipe(vm.recipe,
           function() {
             notyf.confirm("Recette \"" + vm.recipe.title + "\" sauvegardée.");
-            vm.recipe = new Recipe();
+            vm.$emit('save', vm.recipe);
+            vm.discard();
           },
           function() {
             notyf.alert('Erreur lors de la sauvegarde de la recette');
           });
+      },
+
+      discard() {
+        this.recipe = new Recipe();
+        this.notifications = [];
+        this.$emit('close');
       }
     },
 
     mounted() {
+      this.notifications.push({'text': 'Ceci est un test', 'level': 'danger'});
       // Fetch units from the server
       this.unitMgmtService.getUnits(units => this.units = units,
         () => notyf.alert('Erreur lors de la récupération des unités'));

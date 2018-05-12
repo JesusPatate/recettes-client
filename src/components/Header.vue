@@ -1,10 +1,12 @@
 <template>
-  <header class="hero-head">
-    <div class="nav">
-      <div class="nav-center">
-        <span class="nav-item"">
-          <h1 class="title">>> RECIPES <<</h1>
-        </span>
+  <header class="hero-head is-primary">
+    <div class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            Recettes
+          </a>
+        </div>
       </div>
     </div>
   </header>

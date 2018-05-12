@@ -1,7 +1,3 @@
-html {
-    background-color: whitesmoke;
-}
-
 section .title.is-3 {
     margin-bottom: 0.75em;
 }
@@ -10,12 +6,16 @@ section .title.is-3 {
     background-color: #EEEEEE;
 }
 
-.hero-head .title:hover {
-    color: #00D1B2;
+.navbar-brand {
+    text-transform: uppercase; 
 }
 
 .panel-heading h3 {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+div + form {
+    margin-top: 1em;
 }
