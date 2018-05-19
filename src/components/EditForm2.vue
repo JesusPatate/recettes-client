@@ -7,7 +7,7 @@
         <button class="delete" aria-label="close" @click="discard"></button>
       </header>
       <section class="modal-card-body">
-        <app-notifications :messages="notifications"></app-notifications>
+        <app-alert :message="message" @validate="message = ''"></app-alert>
         <form>
           <div class="field">
             <label class="label" for="inputName">Titre : </label>
@@ -128,12 +128,6 @@
         <input class="input" type="text" id="source" v-model="recipe.source">
       </p>
     </div>
-
-    <div class="field">
-      <p class="control">
-        <!-- <input type="button" class="button is-primary" id="btnSubmit" value="Valider" > -->
-      </p>
-    </div>
         </form>
       </section>
       <footer class="modal-card-foot">
@@ -147,27 +141,27 @@
 <script>
   import Recipe from 'js/model/Recipe.js';
   import Ingredient from 'js/model/Ingredient.js';
-  import Notifications from './Notifications.vue';
+  import Alert from './Alert.vue';
   import RecipeManagementService from 'js/application/RecipeManagementService.js';
   import UnitManagementService from 'js/application/UnitManagementService.js';
   import notyf from 'js/notyf.js';
 
   export default {
     components: {
-      'app-notifications': Notifications,
+      'app-alert': Alert,
     },
 
     props: {
-      show: false
+      show: false,
+      units: null
     },
 
     data() {
       return {
         recipe: new Recipe(),
-        units: [],
         recipeMgmtService: new RecipeManagementService(),
         unitMgmtService: new UnitManagementService(),
-        notifications: []
+        message: ""
       };
     },
 
@@ -209,29 +203,25 @@
         const vm = this;
 
         this.recipeMgmtService.saveRecipe(vm.recipe,
-          function() {
-            notyf.confirm("Recette \"" + vm.recipe.title + "\" sauvegardée.");
-            vm.$emit('save', vm.recipe);
+          function(recipe) {
+            vm.message = 'Recette "' + recipe.title + '\" sauvegardée.';
+            vm.$emit('save', recipe);
             vm.discard();
           },
           function() {
-            notyf.alert('Erreur lors de la sauvegarde de la recette');
+            vm.message = 'Erreur lors de la sauvegarde de la recette';
           });
       },
 
       discard() {
         this.recipe = new Recipe();
-        this.notifications = [];
+        this.recipe.ingredients.push(new Ingredient());
+        this.message = "";
         this.$emit('close');
       }
     },
 
     mounted() {
-      this.notifications.push({'text': 'Ceci est un test', 'level': 'danger'});
-      // Fetch units from the server
-      this.unitMgmtService.getUnits(units => this.units = units,
-        () => notyf.alert('Erreur lors de la récupération des unités'));
-
       // For new recipes with no ingredients, add an empty ingredient line
       if (this.recipe.ingredients.length === 0) {
         this.recipe.ingredients.push(new Ingredient());

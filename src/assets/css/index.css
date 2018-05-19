@@ -19,3 +19,9 @@ section .title.is-3 {
 div + form {
     margin-top: 1em;
 }
+
+#addRecipeBtn {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+}

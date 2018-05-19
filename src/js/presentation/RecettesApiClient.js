@@ -31,7 +31,7 @@ export default class RecettesApiClient {
   saveRecipe(recipe, success = function() {}, failure = function() {}) {
     axios.post(config.apiUrl + '/recipes', recipe)
       .then((response) => {
-        success();
+        success(response.data);
       })
       .catch(function (error) {
         console.error("Failed to save recipe : " + error);

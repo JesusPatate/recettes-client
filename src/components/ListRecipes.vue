@@ -39,33 +39,17 @@
       'app-recipe': Recipe
     },
 
+    props: ['recipes'],
+
     data() {
       return {
         recipeMgmtService: new RecipeManagementService(),
         apiClient: new RecettesApiClient(),
-        recipes: [],
         message: null
       };
     },
 
     methods: {
-      loadRecipes() {
-        const vm = this;
-
-        this.recipeMgmtService.getRecipes(
-          function(recipes) {
-            vm.recipes = recipes;
-
-            if (recipes.length === 0) {
-              notyf.alert("Aucune recette trouvée")
-            }
-          },
-          function() {
-            notyf.alert("Erreur lors de la récupération des recettes");
-          }
-        );
-      },
-
       notAvailable() {
         notyf.alert('Fonctionnalité non disponible pour le moment');
       },
@@ -92,10 +76,6 @@
           );
         }
       }
-    },
-
-    mounted() {
-      this.loadRecipes();
     }
   }
 </script>
