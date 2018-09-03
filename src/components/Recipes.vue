@@ -1,28 +1,40 @@
 <template>
     <div>
-        <app-recipes :recipes="recipes" @delete="deleteRecipe($event)"></app-recipes>
-        <app-recipe-form :show="showAddRecipeModal" :units="units" @close="showAddRecipeModal = false" @save="addRecipe($event)"></app-recipe-form>
-        <button id="addRecipeBtn" class="button is-outlined is-success" title="Ajouter une recette" @click="showAddRecipeModal = true">+</button>
+        <app-recipe-list></app-recipe-list>
+        <app-recipe-form ref="editForm"
+            :show="showAddRecipeModal"
+            :units="units"
+            @close="showAddRecipeModal = false">
+        </app-recipe-form>
+        <button id="addRecipeBtn"
+            class="button is-outlined is-success"
+            title="Ajouter une recette"
+            @click="showAddRecipeModal = true">
+          + 
+        </button>
     </div>
 </template>
 
 <script>
-  import ListRecipes from './ListRecipes.vue';
+  import RecipeList from './RecipeList.vue';
   import EditForm from './EditForm2.vue';
   import UnitManagementService from 'js/application/UnitManagementService.js';
   import RecipeManagementService from 'js/application/RecipeManagementService.js';
   import notyf from 'js/notyf.js';
+  import recipeStore from 'js/application/recipeStore.js';
+  import unitStore from 'js/application/unitStore.js';
+  import { eventBus } from 'js/application/eventBus.js';
 
   export default {
     components: {
-      'app-recipes': ListRecipes,
+      'app-recipe-list': RecipeList,
       'app-recipe-form': EditForm
     },
 
     data() {
       return {
-        recipes: [],
-        units: [],
+        recipes: recipeStore.items,
+        units: unitStore.items,
         unitMgmtService: new UnitManagementService(),
         recipeMgmtService: new RecipeManagementService(),
         showAddRecipeModal: false
@@ -30,41 +42,30 @@
     },
 
     methods: {
-      addRecipe(recipe) {
-        this.recipes.push(recipe);
-      },
-
-      deleteRecipe(recipe) {
-        const index = this.recipes.findIndex((r) => r.id === recipe.id);
-        this.recipes.splice(index, 1);
-      },
-
       loadRecipes() {
         const vm = this;
 
-        this.recipeMgmtService.getRecipes(
-          function(recipes) {
-            vm.recipes = recipes;
-
+        recipeStore.init(
+          recipes => {
             if (recipes.length === 0) {
               notyf.alert("Aucune recette trouvée")
             }
-          },
-          function() {
-            notyf.alert("Erreur lors de la récupération des recettes");
-          }
-        );
+          }, () => notyf.alert("Erreur lors de la récupération des recettes"));
       },
 
       loadUnits() {
-        this.unitMgmtService.getUnits(units => this.units = units,
-          () => notyf.alert('Erreur lors de la récupération des unités'));
+        unitStore.init(
+          units => {
+            if (units.length === 0) {
+              notyf.alert("Aucune unité trouvée")
+            }
+          }, () => notyf.alert('Erreur lors de la récupération des unités'));
       }
     },
 
     mounted() {
-      this.loadRecipes();
       this.loadUnits();
+      this.loadRecipes();
     }
   }
 </script>

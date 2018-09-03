@@ -6,7 +6,7 @@ export default class UnitManagementService {
       this.apiClient = new RecettesApiClient();
     }
 
-    getUnits(onSuccess, onFailure) {
+    getAll(onSuccess, onFailure) {
         this.apiClient.getUnits(onSuccess, onFailure);
     }
 }

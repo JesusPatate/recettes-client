@@ -4,7 +4,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Ajouter une recette</p>
-        <button class="delete" aria-label="close" @click="discard"></button>
+        <button class="delete" aria-label="close" @click="discard"> </button>
       </header>
       <section class="modal-card-body">
         <app-alert :message="message" @validate="message = ''"></app-alert>
@@ -142,9 +142,10 @@
   import Recipe from 'js/model/Recipe.js';
   import Ingredient from 'js/model/Ingredient.js';
   import Alert from './Alert.vue';
-  import RecipeManagementService from 'js/application/RecipeManagementService.js';
-  import UnitManagementService from 'js/application/UnitManagementService.js';
   import notyf from 'js/notyf.js';
+  import recipeStore from 'js/application/recipeStore.js';
+  import unitStore from 'js/application/unitStore.js';
+  import { eventBus } from 'js/application/eventBus.js';
 
   export default {
     components: {
@@ -152,15 +153,16 @@
     },
 
     props: {
-      show: false,
-      units: null
+      show: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {
       return {
         recipe: new Recipe(),
-        recipeMgmtService: new RecipeManagementService(),
-        unitMgmtService: new UnitManagementService(),
+        units: unitStore.items,
         message: ""
       };
     },
@@ -196,21 +198,21 @@
        */
       setUnit(index, event) {
         const unitId = event.target.value;
-        this.recipe.ingredients[index].unit = getUnit(unitId, this.units);
+        this.recipe.ingredients[index].unit = unitStore.get(unitId);
       },
 
       save() {
         const vm = this;
 
-        this.recipeMgmtService.saveRecipe(vm.recipe,
+        recipeStore.add(vm.recipe,
           function(recipe) {
             vm.message = 'Recette "' + recipe.title + '\" sauvegardée.';
-            vm.$emit('save', recipe);
             vm.discard();
           },
           function() {
             vm.message = 'Erreur lors de la sauvegarde de la recette';
           });
+
       },
 
       discard() {
@@ -219,6 +221,12 @@
         this.message = "";
         this.$emit('close');
       }
+    },
+
+    created() {
+      eventBus.$on('editRecipe', function(id) {
+        alert('Recipe ' + id + ' will be updated')
+      })
     },
 
     mounted() {

@@ -226,10 +226,6 @@
     },
 
     mounted() {
-      // Fetch units from the server
-      this.unitMgmtService.getUnits(units => this.units = units,
-        () => notyf.alert('Erreur lors de la récupération des unités'));
-
       // For new recipes with no ingredients, add an empty ingredient line
       if (this.recipe.ingredients.length === 0) {
         this.recipe.ingredients.push(new Ingredient());

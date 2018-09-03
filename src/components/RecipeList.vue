@@ -10,18 +10,18 @@
           </a>
         </p>
         <p class="control">
-          <a class="button is-info is-outlined" @click="editRecipe(recipe)" title="Éditer">
-          <span class="icon">
-            <i class="mdi mdi-pencil"></i>
-          </span>
-        </a>
+          <a class="button is-info is-outlined" @click="editRecipe(recipe);" title="Éditer">
+            <span class="icon">
+              <i class="mdi mdi-pencil"></i>
+            </span>
+          </a>
         </p>
         <p class="control">
           <a class="button is-danger is-outlined" @click="deleteRecipe(recipe);" title="Supprimer">
-          <span class="icon">
-            <i class="mdi mdi-delete-forever"></i>
-          </span>
-        </a>
+            <span class="icon">
+              <i class="mdi mdi-delete-forever"></i>
+            </span>
+          </a>
         </p>
       </app-recipe>
     </div>
@@ -33,19 +33,18 @@
   import RecettesApiClient from 'js/presentation/RecettesApiClient.js';
   import RecipeManagementService from 'js/application/RecipeManagementService.js';
   import notyf from 'js/notyf.js';
+  import recipeStore from 'js/application/recipeStore.js';
+  import { eventBus } from 'js/application/eventBus.js';
 
   export default {
     components: {
       'app-recipe': Recipe
     },
 
-    props: ['recipes'],
-
     data() {
       return {
-        recipeMgmtService: new RecipeManagementService(),
-        apiClient: new RecettesApiClient(),
-        message: null
+        recipes: recipeStore.items,
+        recipeMgmtService: new RecipeManagementService()
       };
     },
 
@@ -55,25 +54,16 @@
       },
 
       editRecipe(recipe) {
-          this.$emit('editRecipe', recipe);
+          eventBus.$emit('editRecipe', recipe.id);
       },
 
       deleteRecipe(recipe) {
         const ok = confirm("Supprimer la recette \"" + recipe.title + "\" ?");
 
         if (ok) {
-          const vm = this;
-
-          this.apiClient.deleteRecipe(recipe.id,
-            function() {
-              const index = vm.recipes.findIndex((r) => r.id === recipe.id);
-              vm.recipes.splice(index, 1);
-              notyf.confirm("Recette \"" + recipe.title + "\" supprimée.");
-            },
-            function() {
-              notyf.alert('Erreur lors de la suppression de la recette');
-            }
-          );
+          recipeStore.remove(recipe.id,
+            () => notyf.confirm("Recette \"" + recipe.title + "\" supprimée."),
+            () => notyf.alert('Erreur lors de la suppression de la recette'));
         }
       }
     }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from 'config';
 
 export default class RecettesApiClient {
-  getRecipes(success = function() {}, failure = function() {}) {
+  getRecipes(success = () => {}, failure = () => {}) {
     axios.get(config.apiUrl + '/recipes')
       .then((response) => {
         success(response.data);
@@ -13,7 +13,7 @@ export default class RecettesApiClient {
       });
   }
 
-  getUnits(success = function() {}, failure = function() {}) {
+  getUnits(success = () => {}, failure = () => {}) {
     let units = [];
 
     axios.get(config.apiUrl + '/units', this.recipe)
@@ -28,7 +28,7 @@ export default class RecettesApiClient {
     return units;
   }
 
-  saveRecipe(recipe, success = function() {}, failure = function() {}) {
+  saveRecipe(recipe, success = () => {}, failure = () => {}) {
     axios.post(config.apiUrl + '/recipes', recipe)
       .then((response) => {
         success(response.data);
@@ -39,7 +39,7 @@ export default class RecettesApiClient {
       });
   }
 
-  updateRecipe(recipe, success = function() {}, failure = function() {}) {
+  updateRecipe(recipe, success = () => {}, failure = () => {}) {
     axios.put(config.apiUrl + '/recipes', recipe)
       .then((response) => {
         success();
@@ -50,7 +50,7 @@ export default class RecettesApiClient {
       });
   }
 
-  deleteRecipe(id, success = function() {}, failure = function() {}) {
+  deleteRecipe(id, success = () => {}, failure = () => {}) {
     axios.delete(config.apiUrl + '/recipes/' + id)
       .then((response) => {
         success();
