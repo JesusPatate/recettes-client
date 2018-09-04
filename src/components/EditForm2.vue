@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" :class="{'is-active': show}">
+  <div class="modal" :class="{'is-active': display}">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -161,8 +161,10 @@
 
     data() {
       return {
+        display: this.show,
         recipe: new Recipe(),
         units: unitStore.items,
+        edition: false,
         message: ""
       };
     },
@@ -204,29 +206,43 @@
       save() {
         const vm = this;
 
-        recipeStore.add(vm.recipe,
-          function(recipe) {
-            vm.message = 'Recette "' + recipe.title + '\" sauvegardée.';
-            vm.discard();
-          },
-          function() {
-            vm.message = 'Erreur lors de la sauvegarde de la recette';
-          });
+        let onSuccess = function(recipe) {
+          vm.message = 'Recette "' + recipe.title + '\" sauvegardée.';
+          vm.discard();
+        };
 
+        let onError = function() {
+          vm.message = 'Erreur lors de la sauvegarde de la recette';
+        };
+
+        if (this.edition) {
+          recipeStore.update(vm.recipe, onSuccess, onError);
+        } else {
+          recipeStore.add(vm.recipe, onSuccess, onError);
+        }
       },
 
       discard() {
+        this.display = false;
         this.recipe = new Recipe();
         this.recipe.ingredients.push(new Ingredient());
         this.message = "";
-        this.$emit('close');
       }
     },
 
     created() {
+      const vm = this;
+
+      eventBus.$on('addNewRecipe', function(id) {
+        vm.display = true;
+      });
+
       eventBus.$on('editRecipe', function(id) {
-        alert('Recipe ' + id + ' will be updated')
-      })
+        let recipe = recipeStore.get(id);
+        vm.recipe = Recipe.from(recipe);
+        vm.edition = true;
+        vm.display = true;
+      });
     },
 
     mounted() {

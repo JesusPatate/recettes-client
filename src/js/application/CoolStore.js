@@ -28,6 +28,15 @@ export default class CoolStore extends Store {
       onFailure);
   }
 
+  update(entity, onSuccess = () => {}, onFailure = () => {}) {
+    this.entityMgmtService.save(entity,
+      () => {
+        super.update(entity);
+        onSuccess(entity);
+      },
+      onFailure);
+  }
+
   remove(id, onSuccess = () => {}, onFailure = () => {}) {
     this.entityMgmtService.delete(id,
       () => {

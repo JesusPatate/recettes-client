@@ -1,16 +1,12 @@
 <template>
     <div>
         <app-recipe-list></app-recipe-list>
-        <app-recipe-form ref="editForm"
-            :show="showAddRecipeModal"
-            :units="units"
-            @close="showAddRecipeModal = false">
-        </app-recipe-form>
-        <button id="addRecipeBtn"
-            class="button is-outlined is-success"
+        <app-recipe-form></app-recipe-form>
+        <button id="addRecipeBtn" 
+            class="button is-outlined is-success" 
             title="Ajouter une recette"
-            @click="showAddRecipeModal = true">
-          + 
+            @click="addNewRecipe()"> 
+          +
         </button>
     </div>
 </template>
@@ -60,6 +56,10 @@
               notyf.alert("Aucune unité trouvée")
             }
           }, () => notyf.alert('Erreur lors de la récupération des unités'));
+      },
+
+      addNewRecipe() {
+        eventBus.$emit('addNewRecipe');
       }
     },
 

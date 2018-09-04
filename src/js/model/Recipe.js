@@ -1,5 +1,7 @@
 import UUID from 'uuidjs';
 
+import Ingredient from 'js/model/Ingredient.js';
+
 export default class Recipe {
   constructor(
       id = null,
@@ -21,5 +23,19 @@ export default class Recipe {
       this.servings = servings;
       this.source = source;
       this.ingredients = Array.from(ingredients);
+    }
+
+    static from(recipe) {
+      return new Recipe(
+            recipe.id,
+            recipe.title,
+            recipe.hot,
+            recipe.dessert,
+            recipe.preparationTime,
+            recipe.cookingTime,
+            recipe.servings,
+            recipe.source,
+            recipe.ingredients.map(i => Ingredient.from(i))
+      );
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="columns" v-for="recipe in recipes">
+    <div class="columns" v-for="recipe in recipes" :key='recipe.id'>
       <app-recipe :recipe="recipe">
         <p class="control">
           <a class="button is-success is-outlined" @click="notAvailable()" title="Sélectionner">

@@ -18,6 +18,11 @@ export default class {
     this.items.push(item);
   }
 
+  update(item) {
+    let idx = this.items.findIndex(elt => elt.id === item.id);
+    this.items[idx] = item;
+  }
+
   remove(id) {
     let idx = this.items.findIndex(item => item.id === id);
     let deleted = this.items.splice(idx, 1);
