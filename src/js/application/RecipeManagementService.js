@@ -26,18 +26,20 @@ export default class RecipeManagementService {
       error => onFailure(error));
   }
 
-  save(recipe, onSuccess, onFailure) {
+  create(recipe, onSuccess, onFailure) {
       const representation = RecipeRepresentation.from(recipe);
 
-      if (recipe.id === null) {
-        this.apiClient.saveRecipe(representation,
-          representation => {
-            let recipe = this.buildRecipe(representation);
-            onSuccess(recipe);
-          }, onFailure);
-      } else {
-        this.apiClient.updateRecipe(representation, onSuccess, onFailure);
-      }
+      this.apiClient.saveRecipe(representation,
+        response => {
+          let recipe = this.buildRecipe(response);
+          onSuccess(recipe);
+        }, 
+        onFailure);
+  }
+
+  update(recipe, onSuccess, onFailure) {
+    const representation = RecipeRepresentation.from(recipe);
+    this.apiClient.updateRecipe(representation, onSuccess, onFailure);
   }
 
   delete(id, onSuccess, onFailure) {

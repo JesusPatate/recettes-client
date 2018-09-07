@@ -11,6 +11,11 @@ class RecipeStore extends CoolStore {
     super.add(recipe, onSuccess, onFailure);
   }
 
+  update(recipe, onSuccess = () => {}, onFailure = () => {}) {
+    console.debug(`Updating recipe ${recipe.id} in the store`);
+    super.update(recipe, onSuccess, onFailure);
+  }
+
   remove(id, onSuccess = () => {}, onFailure = () => {}) {
     console.debug(`Removing recipe ${id} from the store`);
     super.remove(id, onSuccess, onFailure);

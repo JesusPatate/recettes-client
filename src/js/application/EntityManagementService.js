@@ -4,7 +4,11 @@ export default class EntityManagementService {
     throw new Error("Method not implemented");
   }
 
-  save(entity,onSuccess = () => {}, onFailure = () => {}) {
+  create(entity,onSuccess = () => {}, onFailure = () => {}) {
+    throw new Error("Method not implemented");
+  }
+
+  update(entity,onSuccess = () => {}, onFailure = () => {}) {
     throw new Error("Method not implemented");
   }
 

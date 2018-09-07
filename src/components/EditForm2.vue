@@ -234,6 +234,7 @@
       const vm = this;
 
       eventBus.$on('addNewRecipe', function(id) {
+        vm.edition = false;
         vm.display = true;
       });
 

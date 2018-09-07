@@ -1,10 +1,10 @@
-import UUID from 'uuidjs';
+import uuid from 'js/infrastructure/uuid.js';
 
 import Ingredient from 'js/model/Ingredient.js';
 
 export default class Recipe {
   constructor(
-      id = null,
+      id = uuid(),
       title = '',
       hot = false,
       dessert = false,

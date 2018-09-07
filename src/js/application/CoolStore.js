@@ -20,7 +20,7 @@ export default class CoolStore extends Store {
   }
 
   add(newEntity, onSuccess = () => {}, onFailure = () => {}) {
-    this.entityMgmtService.save(newEntity,
+    this.entityMgmtService.create(newEntity,
       entity => {
         super.add(entity);
         onSuccess(entity);
@@ -29,7 +29,7 @@ export default class CoolStore extends Store {
   }
 
   update(entity, onSuccess = () => {}, onFailure = () => {}) {
-    this.entityMgmtService.save(entity,
+    this.entityMgmtService.update(entity,
       () => {
         super.update(entity);
         onSuccess(entity);

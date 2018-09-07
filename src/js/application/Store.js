@@ -1,8 +1,3 @@
-/* 
- * TODO : faire une sous-classe qui surcharge add() et remove() et qui font appel au client de l'API.
- * UnitStore et RecipeStore devront étendre cette sous-classe.
- */
-
 export default class {
   constructor() {
     this.items = [];
@@ -20,7 +15,8 @@ export default class {
 
   update(item) {
     let idx = this.items.findIndex(elt => elt.id === item.id);
-    this.items[idx] = item;
+    this.items.splice(idx, 1, item);
+    // We must use splice instead of accessing directly to items[idx] so that Vue detects the change
   }
 
   remove(id) {
