@@ -22,6 +22,6 @@ class RecipeStore extends CoolStore {
   }
 }
 
-let store = new RecipeStore();
+const store = new RecipeStore();
 
 export default store;

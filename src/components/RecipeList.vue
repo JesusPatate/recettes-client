@@ -34,7 +34,7 @@
   import RecipeManagementService from 'js/application/RecipeManagementService.js';
   import notyf from 'js/notyf.js';
   import recipeStore from 'js/application/recipeStore.js';
-  import { eventBus } from 'js/application/eventBus.js';
+  import eventBus from 'js/application/eventBus.js';
 
   export default {
     components: {

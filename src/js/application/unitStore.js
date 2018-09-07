@@ -17,6 +17,6 @@ class UnitStore extends CoolStore {
   }
 }
 
-let store = new UnitStore();
+const store = new UnitStore();
 
 export default store;
