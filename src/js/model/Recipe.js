@@ -1,4 +1,4 @@
-import uuid from 'js/infrastructure/uuid.js';
+import uuid from 'uuid/v4';
 
 import Ingredient from 'js/model/Ingredient.js';
 

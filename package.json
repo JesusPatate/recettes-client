@@ -14,6 +14,7 @@
     "bulma": "^0.6.2",
     "mdi": "^2.0.46",
     "notyf": "git+https://github.com/JesusPatate/notyf.git",
+    "uuid": "^3.3.2",
     "uuidjs": "^3.5.3",
     "vue": "^2.4.4"
   },
