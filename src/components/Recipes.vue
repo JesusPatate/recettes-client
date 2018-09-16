@@ -2,11 +2,10 @@
     <div>
         <app-recipe-list></app-recipe-list>
         <app-recipe-form></app-recipe-form>
-        <button id="addRecipeBtn" 
-            class="button is-outlined is-success" 
+        <button id="addRecipeBtn" type="button"
+            class="btn btn-sm btn-outline-secondary mdi mdi-plus rounded-0"
             title="Ajouter une recette"
-            @click="addNewRecipe()"> 
-          +
+            @click="addNewRecipe()">
         </button>
     </div>
 </template>

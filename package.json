@@ -10,10 +10,13 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "@mdi/font": "^2.7.94",
     "axios": "^0.16.1",
-    "bulma": "^0.6.2",
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.3.1",
     "mdi": "^2.0.46",
     "notyf": "git+https://github.com/JesusPatate/notyf.git",
+    "popper.js": "^1.14.4",
     "uuid": "^3.3.2",
     "uuidjs": "^3.5.3",
     "vue": "^2.4.4"
@@ -24,14 +27,14 @@
     "not ie <= 8"
   ],
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.9.3",
     "sass-loader": "^6.0.6",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",

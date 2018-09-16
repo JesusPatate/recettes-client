@@ -1,25 +1,14 @@
 <template>
-  <div class="hero is-light is-fullheight">
+  <div class="container-fluid">
     <app-header></app-header>
-
-    <div class="hero-body">
-      <div class="container">
-        <app-recipes></app-recipes>
-      </div>
-    </div>
+    <app-recipes></app-recipes>
   </div>
 </template>
 
-<style scoped>
-  #addRecipeBtn {
-    position: fixed;
-    bottom: 1em;
-    right: 1em; 
-  }
-</style>
-
 <script>
-  import 'bulma';
+  import 'bootstrap';
+  import 'bootstrap/dist/css/bootstrap.min.css';
+  import 'mdi/css/materialdesignicons.min.css'
   import 'assets/css/index.css';
   import Header from './Header.vue';
   import Recipes from './Recipes.vue';
