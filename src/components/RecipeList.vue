@@ -1,3 +1,4 @@
+<!--
 <template>
   <div>
     <div class="columns" v-for="recipe in recipes" :key='recipe.id'>
@@ -24,6 +25,26 @@
           </a>
         </p>
       </app-recipe>
+    </div>
+  </div>
+</template>
+-->
+
+<template>
+  <div class="row" id="recipe-list">
+    <div class="col-md-4" v-for="recipe in recipes" :key='recipe.id'>
+      <div class="card my-2">
+        <div class="card-body">
+          <a data-toggle="collapse" :href="'#collapse-' + recipe.id" class="card-title" role="button" aria-expanded="false">{{recipe.title}}</a>
+          <p class="card-text collapse" :id="'collapse-' + recipe.id">
+            This is a wider card with supporting text below as a natural lead-in to additional content.
+            This content is a little bit longer.
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Temps total : {{recipe.preparationTime + recipe.cookingTime}} min</small>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -15,7 +15,7 @@
               <input class="input" type="text" id="inputName" v-model="recipe.title">
             </p>
           </div>
-    
+
     <div class="field">
       <label class="label">Catégories : </label>
       <p class="control is-unselectable">
@@ -35,7 +35,7 @@
       <label class="label" for="preparationTime">Temps de préparation : </label>
       <div class="field has-addons">
         <p class="control">
-          <input class="input" type="number" id="preparationTime" min="1" value="1" v-model="recipe.preparationTime">
+          <input class="input" type="number" id="preparationTime" min="1" value="1" v-model.number="recipe.preparationTime">
         </p>
 
         <p class="control">
@@ -53,7 +53,7 @@
       <label class="label" for="cookingTime">Temps de cuisson : </label>
       <div class="field has-addons">
         <p class="control">
-          <input class="input" type="number" id="cookingTime" min="0" v-model="recipe.cookingTime">
+          <input class="input" type="number" id="cookingTime" min="0" v-model.number="recipe.cookingTime">
         </p>
 
         <p class="control">
@@ -70,7 +70,7 @@
     <div class="field">
       <label class="label" for="inputServings">Nombre de portions : </label>
       <p class="control">
-        <input class="input" type="number" id="inputServings" min="1" value="1" v-model="recipe.servings">
+        <input class="input" type="number" id="inputServings" min="1" value="1" v-model.number="recipe.servings">
       </p>
     </div>
 
@@ -87,7 +87,7 @@
 
             <div class="column">
               <p class="control">
-                <input class="input" type="number" :id="'amount' + index" min="1" placeholder="Quantité" v-model="item.amount">
+                <input class="input" type="number" :id="'amount' + index" min="1" placeholder="Quantité" v-model.number="item.amount">
               </p>
             </div>
 

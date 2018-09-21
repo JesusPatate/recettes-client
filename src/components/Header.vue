@@ -1,22 +1,23 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light border border-top-0">
-    <div class="container-fluid">
-      <div class="row>"
-        <div class="col-sm-auto">
-          <a class="navbar-brand d-none d-sm-inline" href="#">RECETTES</a>
-        </div>
-        <ul class="navbar-nav">
-          <li class="nav-item text-center">
-            <a class="nav-link active" href="#">Recettes</a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="#">Planning</a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="#">Courses</a>
-          </li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-info border border-top-0">
+    <span class="navbar-brand font-weight-bold" href="#">RECETTES</span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item text-center">
+          <a class="nav-link active" href="#">Recettes</a>
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link" href="#">Planning</a>
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link" href="#">Courses</a>
+        </li>
+      </ul>
     </div>
   </nav>
 </template>

@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="container">
         <app-recipe-list></app-recipe-list>
         <app-recipe-form></app-recipe-form>
         <button id="addRecipeBtn" type="button"
-            class="btn btn-sm btn-outline-secondary mdi mdi-plus rounded-0"
+            class="btn btn-sm btn-info mdi mdi-plus rounded-0"
             title="Ajouter une recette"
             @click="addNewRecipe()">
         </button>
