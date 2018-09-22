@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+curl http://localhost:9200/recipes -X PUT -H content-type:application/json -d '{ "mappings": { "recipe": { "properties": { "title" : { "type": "text", "analyzer": "french", "copy_to": "title_ingredients" }, "hot": { "type": "boolean" }, "dessert": { "type": "boolean" }, "preparationTime": { "type": "short" }, "cookingTime": { "type": "short" }, "servings": { "type": "byte" }, "ingredients": { "type": "nested", "properties": { "name": { "type": "text", "analyzer": "french", "copy_to": "title_ingredients" }, "amount": { "type": "integer", "index": false }, "unitId": { "type": "integer", "index": false } } }, "source": { "type": "text", "index": false }, "title_ingredients": { "type": "text", "analyzer": "french" } } } } }'
