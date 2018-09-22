@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="column is-8 is-offset-2">
     <a class="button recipe-button" @click="toggle">
@@ -32,6 +33,29 @@
     </div>
   </div>
 </template>
+-->
+
+<template>
+  <div class="card my-2">
+    <div class="card-body">
+      <a data-toggle="collapse" :href="'#collapse-' + recipe.id" class="card-title" role="button" aria-expanded="false">{{recipe.title}}</a>
+      <p class="card-text">
+        <small class="text-muted">Temps total : {{recipe.preparationTime + recipe.cookingTime}} min</small>
+      </p>
+    </div>
+    <div class="card-body collapse" :id="'collapse-' + recipe.id">
+      <ul style="list-style: none; padding-left: 0px;">
+        <li v-for="item in recipe.ingredients">
+        <span v-if="item.amount">
+          {{item.amount}}<span v-if="item.unit"> {{item.unit.name}} de </span>
+        </span>
+        {{item.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
 
 <style scoped>
   a.recipe-button {
