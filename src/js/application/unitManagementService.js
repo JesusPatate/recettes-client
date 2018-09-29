@@ -1,7 +1,7 @@
 import RecettesApiClient from 'js/presentation/RecettesApiClient.js';
 
-export default class UnitManagementService {
-    
+class UnitManagementService {
+
     constructor() {
       this.apiClient = new RecettesApiClient();
     }
@@ -10,3 +10,7 @@ export default class UnitManagementService {
         this.apiClient.getUnits(onSuccess, onFailure);
     }
 }
+
+const service = new UnitManagementService();
+
+export default service;

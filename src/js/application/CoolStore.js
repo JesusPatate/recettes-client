@@ -1,4 +1,4 @@
-import RecipeManagementService from 'js/application/RecipeManagementService.js';
+import RecipeManagementService from 'js/application/recipeManagementService.js';
 import Store from 'js/application/Store.js' ;
 
 export default class CoolStore extends Store {
@@ -42,7 +42,7 @@ export default class CoolStore extends Store {
       () => {
         super.remove(id);
         onSuccess(id);
-      }, 
+      },
       onFailure);
   }
 }

@@ -1,38 +1,31 @@
 <template>
     <div class="container">
+        <app-recipe-search class="mb-2"></app-recipe-search>
         <app-recipe-list></app-recipe-list>
-        <app-recipe-form></app-recipe-form>
-        <button id="addRecipeBtn" type="button"
-            class="btn btn-sm btn-info mdi mdi-plus rounded-0"
-            title="Ajouter une recette"
-            @click="addNewRecipe()">
-        </button>
     </div>
 </template>
 
 <script>
   import RecipeList from './RecipeList.vue';
   import RecipeForm from './RecipeForm.vue';
-  import UnitManagementService from 'js/application/UnitManagementService.js';
-  import RecipeManagementService from 'js/application/RecipeManagementService.js';
+  import RecipeSearch from './RecipeSearch.vue';
+  import unitManagementService from 'js/application/unitManagementService.js';
+  import recipeManagementService from 'js/application/recipeManagementService.js';
   import notyf from 'js/notyf.js';
   import recipeStore from 'js/application/recipeStore.js';
   import unitStore from 'js/application/unitStore.js';
-  import eventBus from 'js/application/eventBus.js';
 
   export default {
     components: {
       'app-recipe-list': RecipeList,
-      'app-recipe-form': RecipeForm
+      'app-recipe-form': RecipeForm,
+      'app-recipe-search': RecipeSearch
     },
 
     data() {
       return {
         recipes: recipeStore.items,
-        units: unitStore.items,
-        unitMgmtService: new UnitManagementService(),
-        recipeMgmtService: new RecipeManagementService(),
-        showAddRecipeModal: false
+        units: unitStore.items
       };
     },
 
@@ -55,10 +48,6 @@
               notyf.alert("Aucune unité trouvée")
             }
           }, () => notyf.alert('Erreur lors de la récupération des unités'));
-      },
-
-      addNewRecipe() {
-        eventBus.$emit('addNewRecipe');
       }
     },
 

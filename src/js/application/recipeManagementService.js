@@ -4,19 +4,34 @@ import RecettesApiClient from 'js/presentation/RecettesApiClient.js';
 import RecipeRepresentation from 'js/presentation/representation/RecipeRepresentation.js';
 import unitStore from 'js/application/unitStore.js';
 
-export default class RecipeManagementService {
+class RecipeManagementService {
   constructor() {
     this.apiClient = new RecettesApiClient();
   }
 
   getAll(onSuccess, onFailure) {
-
     this.apiClient.getRecipes(
       result => {
         let recipes = [];
-        
+
         for (let index in result) {
           let representation = result[index];
+          let recipe = this.buildRecipe(representation);
+          recipes.push(recipe);
+        }
+
+        onSuccess(recipes);
+      },
+      error => onFailure(error));
+  }
+
+  search(text, onSuccess = () => {}, onFailure = () => {}) {
+    this.apiClient.search(text,
+      results => {
+        let recipes = [];
+
+        for (let index in results) {
+          let representation = results[index];
           let recipe = this.buildRecipe(representation);
           recipes.push(recipe);
         }
@@ -33,7 +48,7 @@ export default class RecipeManagementService {
         response => {
           let recipe = this.buildRecipe(response);
           onSuccess(recipe);
-        }, 
+        },
         onFailure);
   }
 
@@ -70,3 +85,7 @@ export default class RecipeManagementService {
     return recipe;
   }
 }
+
+const service = new RecipeManagementService();
+
+export default service;

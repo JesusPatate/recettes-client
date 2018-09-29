@@ -31,17 +31,28 @@
 -->
 
 <template>
-  <div class="row" id="recipe-list">
-    <div class="col-md-4" v-for="recipe in recipes" :key='recipe.id'>
-      <app-recipe :recipe="recipe"></app-recipe>
+  <div class="container-fluid" id="recipe-list">
+    <div class="row">
+      <div class="col">
+        <small>{{filtered ? filter.length : recipes.length}} recettes trouvées</small>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-4" v-for="recipe in recipes" :key='recipe.id' v-if="!!display[recipe.id]">
+        <app-recipe :recipe="recipe"></app-recipe>
+      </div>
+    </div>
+    <!--
+    <div class="card-columns">
+      <app-recipe :recipe="recipe" v-for="recipe in recipes" :key='recipe.id' v-if="display[recipe.id]"></app-recipe>
+    </div>
+    -->
   </div>
 </template>
 
 <script>
   import Recipe from './Recipe.vue';
-  import RecettesApiClient from 'js/presentation/RecettesApiClient.js';
-  import RecipeManagementService from 'js/application/RecipeManagementService.js';
+  import recipeManagementService from 'js/application/recipeManagementService.js';
   import notyf from 'js/notyf.js';
   import recipeStore from 'js/application/recipeStore.js';
   import eventBus from 'js/application/eventBus.js';
@@ -54,8 +65,22 @@
     data() {
       return {
         recipes: recipeStore.items,
-        recipeMgmtService: new RecipeManagementService()
+        recipeMgmtService: recipeManagementService,
+        filter: [],
+        filtered: false
       };
+    },
+
+    computed: {
+      display: function() {
+        let result = {};
+
+        this.recipes.forEach(recipe => {
+          result[recipe.id] = !this.filtered || this.filter.includes(recipe.id);
+        });
+
+        return result;
+      }
     },
 
     methods: {
@@ -64,7 +89,7 @@
       },
 
       editRecipe(recipe) {
-          eventBus.$emit('editRecipe', recipe.id);
+          eventBus.$emit('edit-recipe', recipe.id);
       },
 
       deleteRecipe(recipe) {
@@ -76,6 +101,18 @@
             () => notyf.alert('Erreur lors de la suppression de la recette'));
         }
       }
+    },
+
+    created() {
+      eventBus.$on('filter-recipes', ids => {
+        this.filter.splice(0, this.filter.length, ...ids);
+        this.filtered = true;
+      });
+
+      eventBus.$on('clear-filter', () => {
+        this.filter.splice(0, this.filter.length);
+        this.filtered = false;
+      });
     }
   }
 </script>
