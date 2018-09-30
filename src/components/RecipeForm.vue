@@ -9,7 +9,7 @@
 
       <!-- Title -->
       <div class="form-group row">
-        <label for="titleInput" class="col-sm-2 col-form-label">Titre</label>
+        <label for="titleInput" class="col-md-2 col-form-label">Titre</label>
         <div class="col">
           <input type="text" class="form-control" id="titleInput">
         </div>
@@ -18,7 +18,7 @@
       <!-- Categories -->
       <fieldset class="form-group">
         <div class="row">
-          <legend class="col-sm-2 col-form-label pt-0">Catégories</legend>
+          <legend class="col-md-2 col-form-label pt-0">Catégories</legend>
           <div class="col">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="hotCheckbox">
@@ -34,8 +34,8 @@
 
       <!-- Preparation time -->
       <div class="form-group row">
-        <label for="prepTimeInput" class="col-sm-2 col-form-label">Temps de prépraration</label>
-        <div class="col-auto">
+        <label for="prepTimeInput" class="col-md-2 col-form-label">Temps de prépraration</label>
+        <div class="col-md-auto">
           <div class="input-group">
             <input type="number" class="form-control" id="prepTimeInput" value="0" min="0">
             <div class="input-group-append">
@@ -50,8 +50,8 @@
 
       <!-- Cooking time -->
       <div class="form-group row">
-        <label for="cookingTimeInput" class="col-sm-2 col-form-label">Temps de cuisson</label>
-        <div class="col-auto">
+        <label for="cookingTimeInput" class="col-md-2 col-form-label">Temps de cuisson</label>
+        <div class="col-md-auto">
           <div class="input-group">
             <input type="number" class="form-control" id="cookingTimeInput" value="0" min="0">
             <div class="input-group-append">
@@ -66,7 +66,7 @@
 
       <!-- Servings -->
       <div class="form-group row">
-        <label for="servingsInput" class="col-sm-2 col-form-label">Nombre de portions</label>
+        <label for="servingsInput" class="col-md-2 col-form-label">Nombre de portions</label>
         <div class="col-auto">
           <input type="number" class="form-control" id="servingsInput" value="1" min="1">
         </div>
@@ -74,7 +74,7 @@
 
       <!-- source -->
       <div class="form-group row">
-        <label for="sourceInput" class="col-sm-2 col-form-label">Source</label>
+        <label for="sourceInput" class="col-md-2 col-form-label">Source</label>
         <div class="col">
           <input type="text" class="form-control" id="sourceInput">
         </div>
