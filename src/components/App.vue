@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <app-header></app-header>
     <app-recipes></app-recipes>
   </div>

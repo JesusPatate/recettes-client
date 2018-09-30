@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-info border border-top-0">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
     <span class="navbar-brand font-weight-bold" href="#">RECETTES</span>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
