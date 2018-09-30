@@ -8,16 +8,36 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item text-center">
-          <a class="nav-link active" href="#">Recettes</a>
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle active" href="#" id="recipesDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recettes</a>
+          <div class="dropdown-menu" aria-labelledby="recipesDropdownMenu">
+            <a class="dropdown-item" href="#" @click="showRecipeList">Voir les recettes</a>
+            <a class="dropdown-item" href="#" @click="showRecipeForm">Ajouter une recette</a>
+          </div>
         </li>
-        <li class="nav-item text-center">
-          <a class="nav-link" href="#">Planning</a>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#" role="button">Planning</a>
         </li>
-        <li class="nav-item text-center">
-          <a class="nav-link" href="#">Courses</a>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="#" role="button">Courses</a>
         </li>
       </ul>
     </div>
   </nav>
 </template>
+
+<script>
+  import eventBus from 'js/application/eventBus.js';
+
+  export default {
+    methods: {
+      showRecipeList() {
+        eventBus.$emit('show-recipe-list');
+      },
+
+      showRecipeForm() {
+        eventBus.$emit('show-recipe-form');
+      }
+    }
+  }
+</script>
