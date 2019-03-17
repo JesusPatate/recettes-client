@@ -16,10 +16,10 @@
           </div>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" href="#" role="button">Planning</a>
+          <a class="nav-link disabled" href="#" role="button">Planning</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" href="#" role="button">Courses</a>
+          <a class="nav-link disabled" href="#" role="button">Courses</a>
         </li>
       </ul>
     </div>

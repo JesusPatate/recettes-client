@@ -9,9 +9,8 @@
     <div class="card-body collapse small py-0" :id="'collapse-' + recipe.id">
       <ul style="list-style: none; padding-left: 0px;">
         <li v-for="item in recipe.ingredients">
-        <span v-if="item.amount">
-          {{item.amount}}<span v-if="item.unit"> {{item.unit.name}} de </span>
-        </span>
+        <span v-if="item.amount">{{item.amount}}</span>
+        <span v-if="item.unit">{{item.unit.name}} de </span>
         {{item.name}}
         </li>
       </ul>

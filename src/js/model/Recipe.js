@@ -9,7 +9,7 @@ export default class Recipe {
       hot = false,
       dessert = false,
       prepTime = 1,
-      cookingTime = 1,
+      cookingTime = 0,
       servings = 1,
       source = '',
       ingredients = []) {
