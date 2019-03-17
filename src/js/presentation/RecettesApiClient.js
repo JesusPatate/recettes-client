@@ -32,19 +32,8 @@ export default class RecettesApiClient {
     return units;
   }
 
-  saveRecipe(recipe, success = () => {}, failure = () => {}) {
-    axios.post(config.apiUrl + RECIPES_ROUTE, recipe)
-      .then(response => {
-        success(response.data);
-      })
-      .catch(error => {
-        console.error("Failed to save recipe : " + error);
-        failure(error);
-      });
-  }
-
-  updateRecipe(recipe, success = () => {}, failure = () => {}) {
-    axios.put(config.apiUrl + RECIPES_ROUTE, recipe)
+  storeRecipe(recipe, success = () => {}, failure = () => {}) {
+    axios.put(config.apiUrl + RECIPES_ROUTE + '/' + recipe.id, recipe)
       .then(response => {
         success(response.data);
       })
@@ -55,7 +44,7 @@ export default class RecettesApiClient {
   }
 
   deleteRecipe(id, success = () => {}, failure = () => {}) {
-    axios.delete(config.apiUrl + '/recipes/' + id)
+    axios.delete(config.apiUrl + RECIPES_ROUTE + '/' + id)
       .then(response => {
         success(response.data);
       })

@@ -44,7 +44,7 @@ class RecipeManagementService {
   create(recipe, onSuccess, onFailure) {
       const representation = RecipeRepresentation.from(recipe);
 
-      this.apiClient.saveRecipe(representation,
+      this.apiClient.storeRecipe(representation,
         response => {
           let recipe = this.buildRecipe(response);
           onSuccess(recipe);
@@ -54,7 +54,7 @@ class RecipeManagementService {
 
   update(recipe, onSuccess, onFailure) {
     const representation = RecipeRepresentation.from(recipe);
-    this.apiClient.updateRecipe(representation, onSuccess, onFailure);
+    this.apiClient.storeRecipe(representation, onSuccess, onFailure);
   }
 
   delete(id, onSuccess, onFailure) {
