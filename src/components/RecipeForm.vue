@@ -113,6 +113,7 @@
                 v-if="displayIngredientForm"
                 v-bind='{initialValues: ingredient, units: units}'
                 class="alert alert-secondary"
+                @confirm='addIngredient'
                 @cancel='dropIngredient'
             >
             </app-ingredient-form>
@@ -182,12 +183,12 @@
         this.resetIngredient();
       },
 
-      addIngredient() {
-        if (this.ingredient.name.length > 0) {
+      addIngredient(ingredient) {
+        if (ingredient.name.length > 0) {
           this.recipe.ingredients.push({
-            name: this.ingredient.name,
-            amount: this.ingredient.amount,
-            unit: unitStore.get(this.ingredient.unitId)
+            name: ingredient.name,
+            amount: ingredient.amount,
+            unit: unitStore.get(ingredient.unitId)
           });
 
           this.displayIngredientForm = false;
