@@ -1,6 +1,5 @@
 <template>
-  <form>
-    <div class="container">
+  <form class="container">
       <div class="row my-2">
         <div class="col">
           <h3>Nouvelle recette</h3>
@@ -111,10 +110,10 @@
 
             <app-ingredient-form
                 v-if="displayIngredientForm"
-                v-bind='{initialValues: ingredient, units: units}'
+                v-bind='{initialValues: initialIngredientValues, units: units}'
                 class="alert alert-secondary"
-                @confirm='addIngredient'
-                @cancel='dropIngredient'
+                @confirm='addNewIngredient'
+                @cancel='abandonNewIngredient'
             >
             </app-ingredient-form>
 
@@ -142,11 +141,10 @@
 
       <div class="form-group row">
         <div class="col">
-          <button class="btn btn-primary" @click.prevent="cancel">Annuler</button>
-          <button class="btn btn-primary" @click.prevent="submit">Valider</button>
+          <button class="btn btn-primary" @click="cancel">Annuler</button>
+          <button class="btn btn-primary" @click="confirm">Valider</button>
         </div>
       </div>
-    </div>
   </form>
 </template>
 
@@ -154,21 +152,28 @@
   import IngredientForm from './IngredientForm.vue';
   import Recipe from 'js/model/Recipe.js';
   import Ingredient from 'js/model/Ingredient.js';
-  import notyf from 'js/notyf.js';
-  import recipeStore from 'js/application/recipeStore.js';
-  import unitStore from 'js/application/unitStore.js';
-  import eventBus from 'js/application/eventBus.js';
 
   export default {
     components: {
       'app-ingredient-form': IngredientForm
     },
 
+    props: {
+      units: Array,
+      initialValues: Object
+    },
+
     data() {
       return {
-        units: unitStore.items,
-        recipe: new Recipe(),
-        ingredient: {
+        title: initialValues.title,
+        hot: initialValues.hot,
+        dessert: initialValues.dessert,
+        prepTime: initialValues.prepTime,
+        cookingTime: initialValues.cookingTime,
+        servings: initialValues.servings,
+        source: initialValues.source,
+        ingredients: [],
+        initialIngredientValues: {
           name: "",
           amount: 1,
           unitId: 0
@@ -178,30 +183,38 @@
     },
 
     methods: {
-      dropIngredient() {
-        this.displayIngredientForm = false;
-        this.resetIngredient();
-      },
-
-      addIngredient(ingredient) {
+      addNewIngredient(ingredient) {
         if (ingredient.name.length > 0) {
           this.recipe.ingredients.push({
             name: ingredient.name,
             amount: ingredient.amount,
-            unit: unitStore.get(ingredient.unitId)
+            unit: this.getUnit(ingredient.unitId)
           });
 
           this.displayIngredientForm = false;
-          this.resetIngredient();
+          this.resetNewIngredient();
         }
       },
 
-      resetIngredient() {
-        this.ingredient = {
+      getUnit(id) {
+        for (unit of this.units) {
+          if (unit.id = id) {
+            return unit;
+          }
+        }
+      },
+
+      resetNewIngredient() {
+        this.newIngredient = {
           name: "",
           amount: 1,
           unitId: 0
         };
+      },
+
+      abandonNewIngredient() {
+        this.displayIngredientForm = false;
+        this.resetNewIngredient();
       },
 
       removeIngredient(index) {
@@ -209,12 +222,11 @@
       },
 
       cancel() {
-        eventBus.$emit('show-recipe-list');
+        this.$emit('cancel');
       },
 
-      submit() {
-        recipeStore.add(this.recipe);
-        eventBus.$emit('show-recipe-list');
+      confirm() {
+        this.$emit('confirm', this.recipe);
       }
     }
   }

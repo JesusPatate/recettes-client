@@ -49,6 +49,11 @@
         this.selectedRecipe = null;
       },
 
+      addRecipe(recipe) {
+        recipeStore.add(recipe);
+        this.$emit('new-recipe');
+      }
+
       removeRecipe() {
         recipeStore.remove(this.selectedRecipe.id);
         this.hideRecipe();
