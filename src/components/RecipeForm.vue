@@ -25,7 +25,12 @@
               <label class="form-check-label ml-2" for="hotCheckbox">Plat chaud</label>
             </div>
               <div class="form-check mt-1">
-                <input class="form-check-input" type="checkbox" id="dessertCheckbox" v-model="recipe.dessert">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="dessertCheckbox"
+                  v-model="recipe.dessert"
+                >
                 <label class="form-check-label ml-2" for="dessertCheckbox">Dessert</label>
               </div>
           </div>
@@ -37,7 +42,14 @@
         <label for="prepTimeInput" class="col-md-2 col-form-label">Temps de prépraration</label>
         <div class="col-md-auto">
           <div class="input-group">
-            <input type="number" class="form-control" id="prepTimeInput" value="1" min="1" v-model.number="recipe.preparationTime">
+            <input
+              type="number"
+              class="form-control"
+              id="prepTimeInput"
+              value="1"
+              min="1"
+              v-model.number="recipe.preparationTime"
+            >
             <div class="input-group-append">
               <select class="custom-select">
                 <option>minutes</option>
@@ -53,7 +65,14 @@
         <label for="cookingTimeInput" class="col-md-2 col-form-label">Temps de cuisson</label>
         <div class="col-md-auto">
           <div class="input-group">
-            <input type="number" class="form-control" id="cookingTimeInput" value="0" min="0" v-model.number="recipe.cookingTime">
+            <input
+              type="number"
+              class="form-control"
+              id="cookingTimeInput"
+              value="0"
+              min="0"
+              v-model.number="recipe.cookingTime"
+            >
             <div class="input-group-append">
               <select class="custom-select">
                 <option>minutes</option>
@@ -68,7 +87,14 @@
       <div class="form-group row">
         <label for="servingsInput" class="col-md-2 col-form-label">Nombre de portions</label>
         <div class="col-auto">
-          <input type="number" class="form-control" id="servingsInput" value="1" min="1" v-model.number="recipe.servings">
+          <input
+            type="number"
+            class="form-control"
+            id="servingsInput"
+            value="1"
+            min="1"
+            v-model.number="recipe.servings"
+          >
         </div>
       </div>
 
@@ -78,35 +104,18 @@
           <legend class="col-md-2 col-form-label pt-0">Ingrédients</legend>
           <div class="col">
             <p>
-              <a href="#" @click.prevent="displayIngredientForm = true">Ajouter un nouvel ingrédient</a>
+              <a href="#" @click.prevent="displayIngredientForm = true">
+                Ajouter un nouvel ingrédient
+              </a>
             </p>
 
-            <div v-if="displayIngredientForm" class="alert alert-secondary">
-              <div class="form-group row">
-                <label class="col-md-2 col-form-label" for="ingredientName">Nom</label>
-                <div class="col cl-md-auto">
-                  <input class="form-control" type="text" id="ingredientName" v-model="ingredient.name">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-2 col-form-label" for="ingredientQty">Quantité</label>
-                <div class="col col-sm-5">
-                  <div class="input-group">
-                    <input type="number" class="form-control" id="ingredientQty" value="0" min="0" v-model.number="ingredient.amount">
-                    <div class="input-group-append">
-                      <select class="custom-select" v-model="ingredient.unitId">
-                        <option value="0">Unité</option>
-                        <option v-for="unit in units" :value="unit.id">
-                          {{unit.name}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-primary" @click.prevent="dropIngredient">Annuler</button>
-              <button class="btn btn-primary" @click.prevent="addIngredient">Valider</button>
-            </div>
+            <app-ingredient-form
+                v-if="displayIngredientForm"
+                v-bind='{initialValues: ingredient, units: units}'
+                class="alert alert-secondary"
+                @cancel='dropIngredient'
+            >
+            </app-ingredient-form>
 
             <ul class="form-group">
               <li class="col" v-for="(ingredient, index) in recipe.ingredients">
@@ -141,6 +150,7 @@
 </template>
 
 <script>
+  import IngredientForm from './IngredientForm.vue';
   import Recipe from 'js/model/Recipe.js';
   import Ingredient from 'js/model/Ingredient.js';
   import notyf from 'js/notyf.js';
@@ -149,14 +159,18 @@
   import eventBus from 'js/application/eventBus.js';
 
   export default {
+    components: {
+      'app-ingredient-form': IngredientForm
+    },
+
     data() {
       return {
         units: unitStore.items,
         recipe: new Recipe(),
         ingredient: {
           name: "",
-          amount: null,
-          unitId: null
+          amount: 1,
+          unitId: 0
         },
         displayIngredientForm: false
       };
@@ -184,8 +198,8 @@
       resetIngredient() {
         this.ingredient = {
           name: "",
-          amount: null,
-          unitId: null
+          amount: 1,
+          unitId: 0
         };
       },
 
