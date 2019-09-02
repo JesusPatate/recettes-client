@@ -12,7 +12,7 @@
   import 'assets/css/index.css';
   import Header from './Header.vue';
   import Recipes from './Recipes.vue';
-  import RecipeForm from './RecipeForm.vue';
+  import AddRecipe from './AddRecipe.vue';
   import eventBus from 'js/application/eventBus.js';
   import unitManagementService from 'js/application/unitManagementService.js';
   import recipeManagementService from 'js/application/recipeManagementService.js';
@@ -24,7 +24,7 @@
     components: {
       'app-header': Header,
       'app-recipes': Recipes,
-      'app-recipe-form': RecipeForm
+      'app-add-recipe': AddRecipe
     },
 
     data() {
@@ -66,7 +66,7 @@
       });
 
       eventBus.$on('show-recipe-form', () => {
-        this.currentView = 'app-recipe-form';
+        this.currentView = 'app-add-recipe';
       });
     }
   }

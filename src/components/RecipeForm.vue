@@ -10,7 +10,7 @@
       <div class="form-group row">
         <label for="titleInput" class="col-md-2 col-form-label">Titre</label>
         <div class="col">
-          <input type="text" class="form-control" id="titleInput" v-model="recipe.title">
+          <input type="text" class="form-control" id="titleInput" v-model="title">
         </div>
       </div>
 
@@ -20,7 +20,7 @@
           <legend class="col-md-2 col-form-label pt-0">Catégories</legend>
           <div class="col">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="hotCheckbox" v-model="recipe.hot">
+              <input class="form-check-input" type="checkbox" id="hotCheckbox" v-model="hot">
               <label class="form-check-label ml-2" for="hotCheckbox">Plat chaud</label>
             </div>
               <div class="form-check mt-1">
@@ -28,7 +28,7 @@
                   class="form-check-input"
                   type="checkbox"
                   id="dessertCheckbox"
-                  v-model="recipe.dessert"
+                  v-model="dessert"
                 >
                 <label class="form-check-label ml-2" for="dessertCheckbox">Dessert</label>
               </div>
@@ -45,9 +45,8 @@
               type="number"
               class="form-control"
               id="prepTimeInput"
-              value="1"
               min="1"
-              v-model.number="recipe.preparationTime"
+              v-model.number="preparationTime"
             >
             <div class="input-group-append">
               <select class="custom-select">
@@ -68,9 +67,8 @@
               type="number"
               class="form-control"
               id="cookingTimeInput"
-              value="0"
               min="0"
-              v-model.number="recipe.cookingTime"
+              v-model.number="cookingTime"
             >
             <div class="input-group-append">
               <select class="custom-select">
@@ -90,9 +88,8 @@
             type="number"
             class="form-control"
             id="servingsInput"
-            value="1"
             min="1"
-            v-model.number="recipe.servings"
+            v-model.number="servings"
           >
         </div>
       </div>
@@ -110,15 +107,15 @@
 
             <app-ingredient-form
                 v-if="displayIngredientForm"
-                v-bind='{initialValues: initialIngredientValues, units: units}'
+                v-bind="{initialValues: initialIngredientValues, units: units}"
                 class="alert alert-secondary"
-                @confirm='addNewIngredient'
-                @cancel='abandonNewIngredient'
+                @confirm="addNewIngredient"
+                @cancel="dropNewIngredient"
             >
             </app-ingredient-form>
 
             <ul class="form-group">
-              <li class="col" v-for="(ingredient, index) in recipe.ingredients">
+              <li class="col" v-for="(ingredient, index) in ingredients">
                 <span v-if="ingredient.amount">{{ingredient.amount}}</span>
                 <span v-if="ingredient.unit">{{ingredient.unit.name}} de </span>
                 {{ingredient.name}}
@@ -135,7 +132,7 @@
       <div class="form-group row">
         <label for="sourceInput" class="col-md-2 col-form-label">Source</label>
         <div class="col">
-          <input type="text" class="form-control" id="sourceInput" v-model="recipe.source">
+          <input type="text" class="form-control" id="sourceInput" v-model="source">
         </div>
       </div>
 
@@ -159,19 +156,37 @@
     },
 
     props: {
-      units: Array,
-      initialValues: Object
+      units: {
+        type: Array,
+        default: function() {
+          return [];
+        }
+      },
+      initialValues: {
+        type: Object,
+        default: function() {
+          return {
+            title: "",
+            hot: false,
+            dessert: false,
+            preparationTime: 1,
+            cookingTime: 0,
+            servings: 1,
+            source: ""
+          }
+        }
+      }
     },
 
     data() {
       return {
-        title: initialValues.title,
-        hot: initialValues.hot,
-        dessert: initialValues.dessert,
-        prepTime: initialValues.prepTime,
-        cookingTime: initialValues.cookingTime,
-        servings: initialValues.servings,
-        source: initialValues.source,
+        title: this.initialValues.title,
+        hot: this.initialValues.hot,
+        dessert: this.initialValues.dessert,
+        preparationTime: this.initialValues.preparationTime,
+        cookingTime: this.initialValues.cookingTime,
+        servings: this.initialValues.servings,
+        source: this.initialValues.source,
         ingredients: [],
         initialIngredientValues: {
           name: "",
@@ -185,7 +200,7 @@
     methods: {
       addNewIngredient(ingredient) {
         if (ingredient.name.length > 0) {
-          this.recipe.ingredients.push({
+          this.ingredients.push({
             name: ingredient.name,
             amount: ingredient.amount,
             unit: this.getUnit(ingredient.unitId)
@@ -197,8 +212,8 @@
       },
 
       getUnit(id) {
-        for (unit of this.units) {
-          if (unit.id = id) {
+        for (const unit of this.units) {
+          if (unit.id === id) {
             return unit;
           }
         }
@@ -212,13 +227,13 @@
         };
       },
 
-      abandonNewIngredient() {
+      dropNewIngredient() {
         this.displayIngredientForm = false;
         this.resetNewIngredient();
       },
 
       removeIngredient(index) {
-        this.recipe.ingredients.splice(index, 1);
+        this.ingredients.splice(index, 1);
       },
 
       cancel() {
@@ -226,7 +241,18 @@
       },
 
       confirm() {
-        this.$emit('confirm', this.recipe);
+        const recipe = {
+          title: this.title,
+          hot: this.hot,
+          dessert: this.dessert,
+          preparationTime: this.preparationTime,
+          cookingTime: this.cookingTime,
+          servings: this.servings,
+          source: this.source,
+          ingredients: this.ingredients
+        };
+
+        this.$emit('confirm', recipe);
       }
     }
   }

@@ -8,7 +8,7 @@
     </div>
     <div class="form-group row">
       <label class="col-md-2 col-form-label" for="ingredientQty">Quantité</label>
-      <div class="col col-sm-5">
+      <div class="col-sm-6">
         <div class="input-group">
           <input
             type="number"
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-sm-4">
         <input type="checkbox" id="noQuantity" v-model="noAmount" @click="noQuantity">
           <label class="col-auto col-form-label" for="noQuantity">Pas de quantité</label>
       </div>
@@ -42,7 +42,12 @@
   export default {
     props: {
       initialValues: Object,
-      units: Array
+      units: {
+        type: Array,
+        default: function() {
+          return [];
+        }
+      }
     },
 
     data() {

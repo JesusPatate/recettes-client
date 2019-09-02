@@ -1,7 +1,6 @@
 <template>
   <app-recipe-form
-    units="units"
-    initial-values="recipe"
+    :units="units"
     @confirm="addRecipe"
     @cancel="$emit('cancel')">
   </app-recipe-form>
@@ -13,6 +12,7 @@
   import Ingredient from 'js/model/Ingredient.js';
   import recipeStore from 'js/application/recipeStore.js';
   import unitStore from 'js/application/unitStore.js';
+  import uuid from 'uuid/v4';
 
   export default {
     components: {
@@ -21,8 +21,7 @@
 
     data() {
       return {
-        units: unitStore.items,
-        recipe: new Recipe()
+        units: unitStore.items
       };
     },
 
@@ -30,15 +29,16 @@
       addRecipe(data) {
         const ingredients = [];
 
-        for (item of data.ingredients) {
+        for (const item of data.ingredients) {
           ingredients.push(new Ingredient(item.name, item.amount, item.unit));
         }
 
         const recipe = new Recipe(
+          uuid(),
           data.title,
           data.hot,
           data.dessert,
-          data.prepTime,
+          data.preparationTime,
           data.cookingTime,
           data.servings,
           data.source,
