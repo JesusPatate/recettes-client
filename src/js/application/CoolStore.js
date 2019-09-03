@@ -8,6 +8,8 @@ export default class CoolStore extends Store {
   }
 
   init(onSuccess = () => {}, onFailure = () => {}) {
+    this.clear();
+
     this.entityMgmtService.getAll(
       items => {
           for (var i = 0; i < items.length; i++) {

@@ -24,4 +24,9 @@ export default class {
     let deleted = this.items.splice(idx, 1);
     return deleted.length > 0;
   }
+
+  clear() {
+    const deleted = this.items.splice(0, this.items.length);
+    return deleted;
+  }
 };
