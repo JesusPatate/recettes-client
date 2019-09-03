@@ -14,7 +14,7 @@ export default class Recipe {
       source = '',
       ingredients = []) {
 
-      this.id = uuid();
+      this.id = id;
       this.title = title;
       this.hot = hot;
       this.dessert = dessert;
