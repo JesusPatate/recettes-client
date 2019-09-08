@@ -8,20 +8,17 @@
 
 <script>
   import RecipeForm from './RecipeForm.vue';
+  import notyf from 'js/notyf.js';
+  import recipeService from 'js/application/recipeManagementService.js';
+  import unitService from 'js/application/unitManagementService.js';
   import Recipe from 'js/model/Recipe.js';
   import Ingredient from 'js/model/Ingredient.js';
-  import recipeStore from 'js/application/recipeStore.js';
-  import unitStore from 'js/application/unitStore.js';
-  import uuid from 'uuid/v4';
+  import eventBus from 'js/application/eventBus.js';
 
   export default {
-    components: {
-      'app-recipe-form': RecipeForm
-    },
-
     data() {
       return {
-        units: unitStore.items
+        units: []
       };
     },
 
@@ -34,7 +31,7 @@
         }
 
         const recipe = new Recipe(
-          uuid(),
+          data.id,
           data.title,
           data.hot,
           data.dessert,
@@ -45,9 +42,20 @@
           ingredients
         );
 
-        recipeStore.add(recipe);
-        this.$emit('new-recipe', recipe);
+        eventBus.$emit('new-recipe', recipe);
       }
+    },
+
+    created() {
+      const vm = this;
+      unitService.getAll(
+        results => this.units = results,
+        () => notyf.alert('Erreur lors de la récupération des unités')
+      );
+    },
+
+    components: {
+      'app-recipe-form': RecipeForm
     }
   }
 </script>

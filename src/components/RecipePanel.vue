@@ -21,10 +21,10 @@
         </span>
       </p>
     </div>
-    <button type="button" class="btn btn-info col mx-1 mb-2" @click="$emit('edit')">
+    <button type="button" class="btn btn-info col mx-1 mb-2" @click="$emit('edit', recipe)">
       Modifier
     </button>
-    <button type="button" class="btn btn-danger col mx-1 mb-3" @click="$emit('remove')">
+    <button type="button" class="btn btn-danger col mx-1 mb-3" @click="$emit('remove', recipe)">
       Supprimer
     </button>
   </div>

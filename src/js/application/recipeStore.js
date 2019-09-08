@@ -1,10 +1,6 @@
-import recipeManagementService from 'js/application/recipeManagementService.js';
-import CoolStore from 'js/application/CoolStore.js' ;
+import Store from 'js/application/Store.js' ;
 
-class RecipeStore extends CoolStore {
-  constructor() {
-    super(recipeManagementService);
-  }
+class RecipeStore extends Store {
 
   add(recipe, onSuccess = () => {}, onFailure = () => {}, persist = true) {
     console.debug(`Adding recipe ${recipe.id} to the store`);

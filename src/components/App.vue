@@ -1,7 +1,8 @@
 <template>
   <div>
-    <app-header></app-header>
-    <component :is="currentView"></component>
+    <app-header @selected="action = $event"></app-header>
+    <app-recipes v-if="action === 'list'"></app-recipes>
+    <app-add-recipe v-if="action === 'add'"></app-add-recipe>
   </div>
 </template>
 
@@ -14,22 +15,16 @@
   import Recipes from './Recipes.vue';
   import AddRecipe from './AddRecipe.vue';
   import eventBus from 'js/application/eventBus.js';
-  import unitManagementService from 'js/application/unitManagementService.js';
-  import recipeManagementService from 'js/application/recipeManagementService.js';
-  import recipeStore from 'js/application/recipeStore.js';
-  import unitStore from 'js/application/unitStore.js';
+  import recipeService from 'js/application/recipeManagementService.js';
+  import unitService from 'js/application/unitManagementService.js';
   import notyf from 'js/notyf.js';
 
   export default {
-    components: {
-      'app-header': Header,
-      'app-recipes': Recipes,
-      'app-add-recipe': AddRecipe
-    },
-
     data() {
       return {
-        currentView: 'app-recipes'
+        recipes: [],
+        units: [],
+        action: 'list'
       };
     },
 
@@ -37,21 +32,31 @@
       loadRecipes() {
         const vm = this;
 
-        recipeStore.init(
+        recipeService.getAll(
           recipes => {
+            vm.recipes = recipes;
+
             if (recipes.length === 0) {
-              notyf.alert("Aucune recette trouvée")
+              notyf.alert("Aucune recette trouvée");
             }
-          }, () => notyf.alert("Erreur lors de la récupération des recettes"));
+          },
+          () => notyf.alert("Erreur lors de la récupération des recettes")
+        );
       },
 
       loadUnits() {
-        unitStore.init(
+        const vm = this;
+
+        unitService.getAll(
           units => {
+            vm.units = units;
+
             if (units.length === 0) {
               notyf.alert("Aucune unité trouvée")
             }
-          }, () => notyf.alert('Erreur lors de la récupération des unités'));
+          },
+          () => notyf.alert('Erreur lors de la récupération des unités')
+        );
       }
     },
 
@@ -61,13 +66,36 @@
     },
 
     created() {
-      eventBus.$on('show-recipe-list', () => {
-        this.currentView = 'app-recipes';
-      });
+      const vm = this;
 
-      eventBus.$on('show-recipe-form', () => {
-        this.currentView = 'app-add-recipe';
-      });
+      eventBus.$on(
+        'selected',
+        action => { vm.action = action; }
+      );
+
+      eventBus.$on(
+        'new-recipe',
+        recipe => recipeService.create(
+          recipe,
+          () => { vm.action = 'list'; },
+          () => notyf.alert("Insertion de la nouvelle recette échouée")
+        )
+      );
+
+      eventBus.$on(
+        'remove-recipe',
+        recipe => recipeService.delete(
+          recipe.id,
+          () => { vm.action = 'list'; },
+          () => notyf.alert("Suppression de la recette échouée")
+        )
+      );
+    },
+
+    components: {
+      'app-header': Header,
+      'app-recipes': Recipes,
+      'app-add-recipe': AddRecipe
     }
   }
 </script>

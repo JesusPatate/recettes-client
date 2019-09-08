@@ -1,10 +1,6 @@
-import unitManagementService from 'js/application/unitManagementService.js';
-import CoolStore from 'js/application/CoolStore.js' ;
+import Store from 'js/application/Store.js' ;
 
-class UnitStore extends CoolStore {
-  constructor() {
-    super(unitManagementService);
-  }
+class UnitStore extends Store {
 
   add(unit, onSuccess = () => {}, onFailure = () => {}) {
     console.debug(`Adding unit ${unit.id} to the store`);

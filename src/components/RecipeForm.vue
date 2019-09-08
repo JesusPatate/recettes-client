@@ -149,6 +149,7 @@
   import IngredientForm from './IngredientForm.vue';
   import Recipe from 'js/model/Recipe.js';
   import Ingredient from 'js/model/Ingredient.js';
+  import uuid from 'uuid/v4';
 
   export default {
     components: {
@@ -166,6 +167,7 @@
         type: Object,
         default: function() {
           return {
+            id: uuid(),
             title: "",
             hot: false,
             dessert: false,
@@ -180,6 +182,7 @@
 
     data() {
       return {
+        id: this.initialValues.id,
         title: this.initialValues.title,
         hot: this.initialValues.hot,
         dessert: this.initialValues.dessert,
@@ -242,6 +245,7 @@
 
       confirm() {
         const recipe = {
+          id: this.id,
           title: this.title,
           hot: this.hot,
           dessert: this.dessert,

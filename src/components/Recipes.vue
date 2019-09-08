@@ -5,13 +5,13 @@
     </div>
     <div class="row">
       <div class="col">
-        <app-recipe-list @selected="displayRecipe"></app-recipe-list>
+        <app-recipe-list @selected="selectedRecipe = $event"></app-recipe-list>
       </div>
       <div id="recipe-panel" v-if="selectedRecipe" class="col-6 col-md-4 col-lg-3">
         <app-recipe-panel
           :recipe="selectedRecipe"
           @remove="removeRecipe"
-          @close="hideRecipe"
+          @close="selectedRecipe = null"
         >
       </app-recipe-panel>
       </div>
@@ -24,6 +24,7 @@
   import RecipePanel from './RecipePanel.vue';
   import RecipeForm from './RecipeForm.vue';
   import RecipeSearch from './RecipeSearch.vue';
+  import eventBus from 'js/application/eventBus.js';
   import recipeStore from 'js/application/recipeStore.js';
 
   export default {
@@ -41,22 +42,9 @@
     },
 
     methods: {
-      displayRecipe(recipe) {
-        this.selectedRecipe = recipe;
-      },
-
-      hideRecipe() {
+      removeRecipe(recipe) {
+        eventBus.$emit('remove-recipe', recipe);
         this.selectedRecipe = null;
-      },
-
-      addRecipe(recipe) {
-        recipeStore.add(recipe);
-        this.$emit('new-recipe');
-      },
-
-      removeRecipe() {
-        recipeStore.remove(this.selectedRecipe.id);
-        this.hideRecipe();
       }
     }
   }
