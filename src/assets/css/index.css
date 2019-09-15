@@ -1,5 +1,10 @@
-
 #recipe-panel {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#recipe-panel .row ~ .row {
   margin-top: 1em;
-  border-left: 1px solid #cdcdcd;
+  margin-bottom: 1em;
 }

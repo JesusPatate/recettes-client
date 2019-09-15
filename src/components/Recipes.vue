@@ -1,31 +1,33 @@
 <template>
-  <div class="container-fluid">
-    <div v-if="action === 'list'" class="row">
-      <div class="container-fluid">
-        <div class="row">
-          <app-recipe-search class="mb-2"></app-recipe-search>
-        </div>
-        <div class="row">
-          <div id="recipe-list" class="col">
-            <app-recipe-list @selected="displayRecipeDetails"></app-recipe-list>
+  <div>
+    <div class="container-fluid">
+      <div v-if="action === 'list'" class="row">
+        <div class="container-fluid">
+          <div class="row">
+            <app-recipe-search class="mb-2"></app-recipe-search>
           </div>
-          <div id="recipe-panel" v-if="selectedRecipe" class="col-md-4 col-lg-3">
-            <app-recipe-panel
-              :recipe="selectedRecipe"
-              @remove="removeRecipe"
-              @edit="action = 'edit'"
-              @close="selectedRecipe = null"
-            >
-            </app-recipe-panel>
+          <div class="row">
+            <div id="recipe-list" class="col">
+              <app-recipe-list @selected="displayRecipeDetails"></app-recipe-list>
+            </div>
           </div>
         </div>
       </div>
+      <div v-if="action === 'add'" class="row">
+        <app-add-recipe :units="units" @cancel="action = 'list'"></app-add-recipe>
+      </div>
+      <div v-if="action === 'edit'" class="row">
+        <app-edit-recipe :units="units" :recipe="selectedRecipe" @cancel="action = 'list'"></app-edit-recipe>
+      </div>
     </div>
-    <div v-if="action === 'add'" class="row">
-      <app-add-recipe :units="units"></app-add-recipe>
-    </div>
-    <div v-if="action === 'edit'" class="row">
-      <app-edit-recipe :units="units" :recipe="selectedRecipe"></app-edit-recipe>
+    <div v-if="selectedRecipe" v-show="action==='list'" class="fixed-bottom container">
+      <app-recipe-panel
+        :recipe="selectedRecipe"
+        @remove="removeRecipe"
+        @edit="action = 'edit'"
+        @close="selectedRecipe = null"
+      >
+      </app-recipe-panel>
     </div>
   </div>
 </template>
