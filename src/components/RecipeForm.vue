@@ -1,13 +1,7 @@
 <template>
   <form class="container">
-      <div class="row my-2">
-        <div class="col">
-          <h3>Nouvelle recette</h3>
-        </div>
-      </div>
-
       <!-- Title -->
-      <div class="form-group row">
+      <div class="form-group row mt-2">
         <label for="titleInput" class="col-md-2 col-form-label">Titre</label>
         <div class="col">
           <input type="text" class="form-control" id="titleInput" v-model="title">
@@ -174,7 +168,8 @@
             preparationTime: 1,
             cookingTime: 0,
             servings: 1,
-            source: ""
+            source: "",
+            ingredients: []
           }
         }
       }
@@ -190,7 +185,7 @@
         cookingTime: this.initialValues.cookingTime,
         servings: this.initialValues.servings,
         source: this.initialValues.source,
-        ingredients: [],
+        ingredients: this.initialValues.ingredients,
         initialIngredientValues: {
           name: "",
           amount: 1,

@@ -11,8 +11,8 @@
         <li class="nav-item dropdown mx-1">
           <a class="nav-link dropdown-toggle active" href="#" id="recipesDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recettes</a>
           <div class="dropdown-menu" aria-labelledby="recipesDropdownMenu">
-            <a class="dropdown-item" href="#" @click="$emit('selected', 'list')">Voir les recettes</a>
-            <a class="dropdown-item" href="#" @click="$emit('selected', 'add')">Ajouter une recette</a>
+            <a class="dropdown-item" href="#" @click="listRecipes">Voir les recettes</a>
+            <a class="dropdown-item" href="#" @click="addRecipe">Ajouter une recette</a>
           </div>
         </li>
         <li class="nav-item mx-1">
@@ -27,5 +27,18 @@
 </template>
 
 <script>
+  import eventBus from 'js/application/eventBus.js';
 
+  export default {
+
+    methods: {
+      listRecipes() {
+        eventBus.$emit('menu-list-recipes');
+      },
+
+      addRecipe() {
+        eventBus.$emit('menu-add-recipe');
+      }
+    }
+  }
 </script>

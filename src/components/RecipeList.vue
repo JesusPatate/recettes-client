@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" id="recipe-list">
+  <div class="container-fluid">
     <div class="row">
       <div class="col">
         <small>{{filtered ? filter.length : recipes.length}} recettes trouvées</small>
@@ -55,8 +55,7 @@
 
     methods: {
       selected(id) {
-        const recipe = recipeStore.get(id);
-        this.$emit('selected', recipe);
+        this.$emit('selected', id);
       }
     },
 

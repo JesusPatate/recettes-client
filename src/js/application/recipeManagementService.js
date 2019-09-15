@@ -14,7 +14,7 @@ class RecipeManagementService {
 
   getAll(onSuccess, onFailure) {
     if (!this.recipeStore.isEmpty()) {
-      onSuccess(this.store.items);
+      onSuccess(this.recipeStore.items);
     } else {
       this.apiClient.getRecipes(
         result => {
@@ -32,6 +32,10 @@ class RecipeManagementService {
         onFailure
       );
     }
+  }
+
+  get(id) {
+    return this.recipeStore.get(id) || null;
   }
 
   search(text, onSuccess = () => {}, onFailure = () => {}) {
@@ -53,9 +57,9 @@ class RecipeManagementService {
   create(recipe, onSuccess, onFailure) {
       const representation = RecipeRepresentation.from(recipe);
 
-      this.apiClient.storeRecipe(representation,
-        response => {
-          let recipe = this.buildRecipe(response);
+      this.apiClient.storeRecipe(
+        representation,
+        () => {
           this.recipeStore.add(recipe);
           onSuccess(recipe);
         },
@@ -64,6 +68,7 @@ class RecipeManagementService {
 
   update(recipe, onSuccess, onFailure) {
     const representation = RecipeRepresentation.from(recipe);
+
     this.apiClient.storeRecipe(
       representation,
       () => {

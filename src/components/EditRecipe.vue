@@ -1,7 +1,8 @@
 <template>
   <app-recipe-form
     :units="units"
-    @confirm="addRecipe"
+    :initialValues="recipe"
+    @confirm="updateRecipe"
     @cancel="$emit('cancel')">
   </app-recipe-form>
 </template>
@@ -16,11 +17,12 @@
 
   export default {
     props: {
-        units: Array
+      units: Array,
+      recipe: Object
     },
 
     methods: {
-      addRecipe(data) {
+      updateRecipe(data) {
         const ingredients = [];
 
         for (const item of data.ingredients) {
@@ -39,16 +41,16 @@
           ingredients
         );
 
-        recipeService.create(
+        recipeService.update(
           recipe,
-          () => {  eventBus.$emit('new-recipe', recipe); },
-          () => eventBus.$emit('error', 'Insertion de la nouvelle recette échouée')
+          () => {  eventBus.$emit('recipe-updated', recipe); },
+          () => eventBus.$emit('error', 'Mide à jour de la recette échouée')
         );
       }
     },
 
     components: {
       'app-recipe-form': RecipeForm
-    }
+    },
   }
 </script>
