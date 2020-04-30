@@ -13,7 +13,7 @@
     "@mdi/font": "^2.8.94",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mdi": "^2.2.43",
     "notyf": "git+https://github.com/JesusPatate/notyf.git",
     "popper.js": "^1.14.7",
