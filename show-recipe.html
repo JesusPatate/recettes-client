@@ -12,7 +12,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <div class="container-fluid d-flex">
-        <a class="navbar-brand flex-grow-1 fw-bold" href="#">Recettes</a>
+        <a class="navbar-brand flex-grow-1 fw-bold" href="/">Recettes</a>
         <span>Test</span>
       </div>
     </nav>
@@ -20,10 +20,21 @@
     <!-- BODY -->
 
     <div class="container-fluid">
-      <div id="recipe-list" class="mt-3"></div>
-      <div id="ingredient-list-editor"></div>
+      <p id="recipe-id"></p>
+
+      <button id="btn-back" class="btn btn-light border mt-3">
+        <i class="mdi mdi-chevron-left"></i>
+        Retour
+      </button>
     </div>
 
-    <script type="module" src="/src/js/index.js"></script>
+    <script type="module" src="/src/js/show-recipe.js"></script>
+
+    <script lang="javascript">
+      const elt = document.getElementById('btn-back');
+      elt.addEventListener('click', (event) => {
+        history.back();
+      });
+    </script>
   </body>
 </html>
