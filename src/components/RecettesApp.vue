@@ -1,5 +1,22 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script>
+import { mapActions } from "pinia";
+
+import apiClient from "../js/recettes-api-client.js";
+import { useRecipeStore } from "../stores/recipes.js";
+
+export default {
+  created() {
+    this.fetchRecipes();
+  },
+
+  methods: {
+    ...mapActions(useRecipeStore, ["storeAll"]),
+
+    fetchRecipes() {
+      apiClient.getAllRecipes((recipes) => this.storeAll(recipes));
+    },
+  },
+};
 </script>
 
 <template>

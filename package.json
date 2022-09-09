@@ -23,6 +23,7 @@
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "^2.0.2",
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "cypress": "^10.4.0",
     "eslint": "^8.21.0",

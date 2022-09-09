@@ -1,5 +1,18 @@
-<script setup>
+<script>
+import { mapState } from "pinia";
+
 import RecipeSearch from "../components/RecipeSearch.vue";
+import { useRecipeStore } from "../stores/recipes.js";
+
+export default {
+  components: {
+    RecipeSearch,
+  },
+
+  computed: {
+    ...mapState(useRecipeStore, ["recipes", "size"]),
+  },
+};
 </script>
 
 <template>
@@ -12,10 +25,17 @@ import RecipeSearch from "../components/RecipeSearch.vue";
   </div>
 
   <div id="recipe-list" class="container-fluid mb-4">
-    <div class="card text-bg-light" v-for="n in 100" :key="n">
-      <div class="card-body">Poulet roti aux endives sur son lit de carottes rapées au cumin</div>
+    <div
+      class="card text-bg-light border border-2"
+      v-for="recipe in recipes.values()"
+      :key="recipe.id"
+    >
+      <div class="card-body">
+        {{ recipe.title }}
+      </div>
     </div>
   </div>
+  <div class="text-center text-muted mb-4">{{ size }} recettes affichées</div>
 </template>
 
 <style>
