@@ -10,7 +10,11 @@ export default {
 
   methods: {
     search() {
-      recipeService.search(this.term);
+      this.term = this.term.trim();
+
+      if (this.term.length > 0) {
+        recipeService.search(this.term);
+      }
     },
 
     erase() {
