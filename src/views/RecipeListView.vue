@@ -10,13 +10,14 @@ export default {
   },
 
   computed: {
+    // TODO : do not access store's state directly
     ...mapState(useRecipeStore, ["recipes", "size"]),
   },
 };
 </script>
 
 <template>
-  <div class="container-fluid my-4">
+  <div class="container-fluid mb-4">
     <div class="row">
       <div class="col-xl-4 col-md-6">
         <RecipeSearch></RecipeSearch>
@@ -31,11 +32,15 @@ export default {
       :key="recipe.id"
     >
       <div class="card-body">
-        {{ recipe.title }}
+        <router-link
+          :to="{ name: 'recipe-details', params: { id: recipe.id } }"
+        >
+          {{ recipe.title }}
+        </router-link>
       </div>
     </div>
   </div>
-  <div class="text-center text-muted mb-4">{{ size }} recettes affichées</div>
+  <div class="text-center text-muted">{{ size }} recettes affichées</div>
 </template>
 
 <style>

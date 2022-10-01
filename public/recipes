@@ -1,0 +1,240 @@
+[
+  {
+    "id": "6eaa881a-1165-4933-984b-955a1b8de028",
+    "title": "Croque-monsieur",
+    "hot": true,
+    "dessert": false,
+    "preparationTime": 15,
+    "cookingTime": 15,
+    "servings": 2,
+    "source": "",
+    "ingredients": [
+      {
+        "name": "Pain de mie (tranches)",
+        "amount": 8,
+        "unit": null
+      },
+      {
+        "name": "Jambon (tranches)",
+        "amount": 2,
+        "unit": null
+      },
+      {
+        "name": "Emmental rapé",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "Crème fraîche",
+        "amount": null,
+        "unit": null
+      }
+    ]
+  },
+  {
+    "id": "653603f8-ab4e-4b37-b02c-d77aeb56f596",
+    "title": "Brochettes de poulet satay, nouilles à l'ananas",
+    "hot": true,
+    "dessert": false,
+    "preparationTime": 20,
+    "cookingTime": 24,
+    "servings": 4,
+    "source": "Thermomix - Recettes express p. 160",
+    "ingredients": [
+      {
+        "name": "Poulet",
+        "amount": 500,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Eau",
+        "amount": 1000,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Cacahuètes",
+        "amount": 80,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Cassonade",
+        "amount": 1,
+        "unit": "TABLESPOON"
+      },
+      {
+        "name": "Piment (pincée)",
+        "amount": 1,
+        "unit": null
+      },
+      {
+        "name": "Lait de coco",
+        "amount": 200,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Curry (pincée)",
+        "amount": 1,
+        "unit": null
+      },
+      {
+        "name": "Sauce soja",
+        "amount": 6,
+        "unit": "TABLESPOON"
+      },
+      {
+        "name": "Citron vert",
+        "amount": 1,
+        "unit": null
+      },
+      {
+        "name": "Gingembre rapé",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "Coriandre",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "Ananas",
+        "amount": 300,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Oignon",
+        "amount": 50,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Nouilles asiatiques",
+        "amount": 150,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "TABLESPOON"
+      }
+    ]
+  },
+  {
+    "id": "5e9edd57-b1ad-49ff-a251-cd6156c766e3",
+    "title": "Dinde au romarin, dattes et blé à l'orange",
+    "hot": true,
+    "dessert": false,
+    "preparationTime": 10,
+    "cookingTime": 28,
+    "servings": 4,
+    "source": "Thermomix - Recettes express p. 176",
+    "ingredients": [
+      {
+        "name": "Filets de dinde",
+        "amount": 600,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Romarin",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "Orange",
+        "amount": 1,
+        "unit": null
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "TABLESPOON"
+      },
+      {
+        "name": "Gousse d'ail",
+        "amount": 1,
+        "unit": null
+      },
+      {
+        "name": "Dattes",
+        "amount": 8,
+        "unit": null
+      },
+      {
+        "name": "Eau",
+        "amount": 1500,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Blé",
+        "amount": 250,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Beurre",
+        "amount": 50,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Fécule de maïs",
+        "amount": 1,
+        "unit": "TEASPOON"
+      }
+    ]
+  },
+  {
+    "id": "5cc35bb8-ff5e-4ffa-901f-68b9233cfb39",
+    "title": "Magret de canard, épinards et champignons",
+    "hot": true,
+    "dessert": false,
+    "preparationTime": 15,
+    "cookingTime": 24,
+    "servings": 4,
+    "source": "Thermomix - Recettes express p. 178",
+    "ingredients": [
+      {
+        "name": "Magrets de canard",
+        "amount": 2,
+        "unit": null
+      },
+      {
+        "name": "Champignons",
+        "amount": 250,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Epinards",
+        "amount": 200,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Eau",
+        "amount": 500,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Thym",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "Noix de pécan",
+        "amount": 40,
+        "unit": "GRAMS"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 8,
+        "unit": "TABLESPOON"
+      },
+      {
+        "name": "Sirop d'érable",
+        "amount": 2,
+        "unit": "TABLESPOON"
+      },
+      {
+        "name": "Citron vert",
+        "amount": 1,
+        "unit": null
+      }
+    ]
+  }
+]

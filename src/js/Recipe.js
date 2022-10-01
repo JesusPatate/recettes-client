@@ -18,6 +18,7 @@ export default class Recipe {
     this.dessert = dessert;
     this.preparationTime = prepTime;
     this.cookingTime = cookingTime;
+    this.totalTime = this.preparationTime + this.cookingTime;
     this.servings = servings;
     this.source = source;
     this.ingredients = Array.from(ingredients);
