@@ -1,5 +1,5 @@
 <script>
-import apiClient from "../js/recettes-api-client.js";
+import recipeService from "../js/recipe-service.js";
 
 export default {
   data() {
@@ -10,11 +10,12 @@ export default {
 
   methods: {
     search() {
-      apiClient.searchRecipes(this.term);
+      recipeService.search(this.term);
     },
 
     erase() {
       this.term = "";
+      recipeService.fetchAll();
     },
   },
 };
