@@ -40,12 +40,36 @@ export default {
         if (error.response && error.response.status > 0) {
           const response = error.response;
           console.error(
-            `Récupération échouée (statut ${response.status}) ${response.data}`
+            `Récupération des recettes échouée (statut ${response.status}) : ${response.data}`
           );
         } else {
-          console.error(`Récupération échouée : ${error.message}`);
+          console.error(`Récupération des recettes échouée : ${error.message}`);
           console.debug(error);
         }
       });
   },
+
+  searchRecipes(term, onSuccess = () => {}) {
+    console.debug("Récupération des recettes...");
+
+    axios
+      .post(API_URL + "/recipes/search?value=" + term)
+      .then((response) => {
+        console.debug(response.data.length + " recettes récupérées");
+        console.debug(response.data);
+        const recipes = toRecipe(response.data);
+        onSuccess(recipes);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status > 0) {
+          const response = error.response;
+          console.error(
+            `Récupération des recettes échouée (statut ${response.status}) : ${response.data}`
+          );
+        } else {
+          console.error(`Récupération des recettes échouée : ${error.message}`);
+          console.debug(error);
+        }
+      });
+  }
 };
