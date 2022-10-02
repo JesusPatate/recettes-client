@@ -16,7 +16,7 @@ export default {
       <router-link class="navbar-brand flex-grow-1 fw-bold" to="/">
         Recettes
       </router-link>
-      <router-link to="/test">Test</router-link>
+      <router-link to="/new">Nouvelle recette</router-link>
     </nav>
   </nav>
 
