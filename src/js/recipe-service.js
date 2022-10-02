@@ -1,5 +1,8 @@
+import units from "@/assets/units.json";
 import apiClient from "../js/recettes-api-client.js";
 import { useRecipeStore } from "../stores/recipes.js";
+import Ingredient from "./Ingredient.js";
+import Recipe from "./Recipe.js";
 
 var recipeStore = null;
 
@@ -11,6 +14,24 @@ function getRecipeStore() {
   return recipeStore;
 }
 
+function toRecipe(data) {
+  const ingredients = data.ingredients.map(
+    (i) => new Ingredient(i.name, i.amount, i.unit)
+  );
+
+  return new Recipe(
+    data.id,
+    data.title,
+    data.hot,
+    data.dessert,
+    data.preparationTime,
+    data.cookingTime,
+    data.servings,
+    data.source,
+    ingredients
+  );
+}
+
 export default {
   fetchAll() {
     const store = getRecipeStore();
@@ -20,5 +41,27 @@ export default {
   search(term) {
     const store = getRecipeStore();
     apiClient.searchRecipes(term, (recipes) => store.storeAll(recipes, true));
+  },
+
+  add(recipeData, onSuccess = () => {}) {
+    const store = getRecipeStore();
+    const recipe = toRecipe(recipeData);
+    apiClient.saveRecipe(recipe, () => {
+      store.store(recipe);
+    });
+  },
+
+  formatIngredient(ingredientData) {
+    let result = ingredientData.name;
+
+      if (ingredientData.amount) {
+        result += " : " + ingredientData.amount;
+      }
+
+      if (ingredientData.unit) {
+        result += " " + units[ingredientData.unit];
+      }
+
+      return result;
   },
 };

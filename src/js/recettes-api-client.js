@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import Recipe from "./Recipe.js";
-import Ingredient from "./Ingredient.js";
 import { API_URL } from "../config.js";
+import Ingredient from "./Ingredient.js";
+import Recipe from "./Recipe.js";
 
 function toRecipe(data) {
   return data.map((item) => {
@@ -22,6 +22,32 @@ function toRecipe(data) {
       ingredients
     );
   });
+}
+
+function fromRecipe(recipe) {
+  const data = {
+    title: recipe.title,
+    hot: recipe.hot,
+    dessert: recipe.dessert,
+    servings: recipe.servings,
+    preparationTime: recipe.preparationTime,
+    cookingTime: recipe.cookingTime,
+    ingredients: [],
+  };
+
+  if (recipe.source !== null) {
+    data.source = recipe.source;
+  }
+
+  for (const ingredient of recipe.ingredients) {
+    data.ingredients.push({
+      name: ingredient.name,
+      amount: ingredient.amount,
+      unit: ingredient.unit,
+    });
+  }
+
+  return data;
 }
 
 export default {
@@ -69,6 +95,31 @@ export default {
         } else {
           console.error(`Récupération des recettes échouée : ${error.message}`);
           console.debug(error);
+        }
+      });
+  },
+
+  saveRecipe(recipe, onSuccess = () => {}) {
+    console.debug(`Sauvegarde de la recette "${recipe.title}"`);
+
+    const data = fromRecipe(recipe);
+
+    axios
+      .put(API_URL + `/recipes/${recipe.id}`, data)
+      .then(() => {
+        console.debug("Recette sauvegardée");
+        onSuccess();
+      })
+      .catch((error) => {
+        console.debug(error);
+
+        if (error.response && error.response.status > 0) {
+          const response = error.response;
+          console.error(
+            `Sauvegarde échouée (statut ${response.status}) : ${response.data}`
+          );
+        } else {
+          console.error(`Sauvegarde échouée : ${error.message}`);
         }
       });
   }
