@@ -1,17 +1,20 @@
 <script>
-import { mapActions } from "pinia";
-import { useRecipeStore } from "../stores/recipes.js";
+import recipeService from "../js/recipe-service.js";
 import unitMappings from "@/assets/units.json";
 
 export default {
   data() {
     return {
-      recipe: this.get(this.$route.params.id),
+      recipe: recipeService.get(this.$route.params.id),
     };
   },
 
   methods: {
-    ...mapActions(useRecipeStore, ["get"]),
+    deleteRecipe() {
+      recipeService.delete(this.recipe.id, () => {
+        this.$router.push("/");
+      });
+    },
 
     format(ingredient) {
       let result = ingredient.name;
@@ -104,7 +107,7 @@ export default {
       </div>
     </header>
 
-    <section>
+    <section class="mb-4">
       <ul class="fa-ul">
         <li v-for="item in recipe.ingredients" :key="item.name">
           <span class="fa-li">
@@ -114,13 +117,21 @@ export default {
         </li>
       </ul>
     </section>
-    <footer>
-      <button
-        class="btn btn-light border"
-        @click="this.$router.push(`/recipes/${this.recipe.id}/edit`)"
-      >
-        Modifier
-      </button>
+
+    <footer class="row">
+      <div class="col-auto">
+        <button
+          class="btn btn-light border"
+          @click="this.$router.push(`/recipes/${this.recipe.id}/edit`)"
+        >
+          Modifier
+        </button>
+    </div>
+      <div class="col-auto">
+        <button class="btn btn-danger border" @click="deleteRecipe()">
+          Supprimer
+        </button>
+    </div>
     </footer>
   </article>
 </template>

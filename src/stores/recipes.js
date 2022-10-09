@@ -28,5 +28,9 @@ export const useRecipeStore = defineStore({
     store(recipe) {
       this.recipes.set(recipe.id, recipe);
     },
+
+    remove(id) {
+      this.recipes.delete(id);
+    }
   },
 });

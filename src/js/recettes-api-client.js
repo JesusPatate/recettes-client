@@ -100,7 +100,7 @@ export default {
   },
 
   saveRecipe(recipe, onSuccess = () => {}) {
-    console.debug(`Sauvegarde de la recette "${recipe.title}"`);
+    console.debug(`Sauvegarde de la recette "${recipe.title}"...`);
 
     const data = fromRecipe(recipe);
 
@@ -108,6 +108,29 @@ export default {
       .put(API_URL + `/recipes/${recipe.id}`, data)
       .then(() => {
         console.debug("Recette sauvegardée");
+        onSuccess();
+      })
+      .catch((error) => {
+        console.debug(error);
+
+        if (error.response && error.response.status > 0) {
+          const response = error.response;
+          console.error(
+            `Sauvegarde échouée (statut ${response.status}) : ${response.data}`
+          );
+        } else {
+          console.error(`Sauvegarde échouée : ${error.message}`);
+        }
+      });
+  },
+
+  deleteRecipe(recipeId, onSuccess = () => {}) {
+    console.debug("Suppression de la recette...");
+
+    axios
+      .delete(API_URL + `/recipes/${recipeId}`)
+      .then(() => {
+        console.debug("Recette supprimée");
         onSuccess();
       })
       .catch((error) => {

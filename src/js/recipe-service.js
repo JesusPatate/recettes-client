@@ -53,6 +53,15 @@ export default {
     const recipe = toRecipe(recipeData);
     apiClient.saveRecipe(recipe, () => {
       store.store(recipe);
+      onSuccess();
+    });
+  },
+
+  delete(recipeId, onSuccess = () => {}) {
+    const store = getRecipeStore();
+    apiClient.deleteRecipe(recipeId, () => {
+      store.remove(recipeId);
+      onSuccess();
     });
   },
 
