@@ -27,14 +27,13 @@ export default {
         amount: null,
         unit: NO_UNIT,
       },
-      service: recipeService,
       units: unitsMappings,
     };
   },
 
   mounted() {
     if (this.recipeId) {
-        const recipe = this.service.get(this.recipeId);
+        const recipe = recipeService.get(this.recipeId);
         this.title = recipe.title;
         this.hot = recipe.hot;
         this.dessert = recipe.dessert;
@@ -42,6 +41,7 @@ export default {
         this.cookingTime = recipe.cookingTime;
         this.servings = recipe.servings;
         this.ingredients = JSON.parse(JSON.stringify(recipe.ingredients));
+        this.source = recipe.source;
     }
   },
 
@@ -99,7 +99,7 @@ export default {
       }
 
       recipeService.add(recipe);
-      this.$router.push('/');
+      this.$router.push("/");
     },
 
     format(ingredient) {
@@ -292,7 +292,7 @@ export default {
         </div>
       </div>
 
-      <div class="row mb-3">
+      <div class="row mb-4">
         <label
           for="newRecipeSourceInput"
           class="col-sm-3 col-xl-2 col-form-label user-select-none"
