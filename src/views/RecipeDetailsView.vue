@@ -35,7 +35,15 @@ export default {
 </script>
 
 <template>
-  <h4 class="title mb-4">{{ recipe.title }}</h4>
+  <h4 class="title mb-4">
+    <font-awesome-icon
+      icon="fa-solid fa-angle-left"
+      title="Retour"
+      class="me-1 back-icon"
+      @click="$router.back()"
+    />
+    {{ recipe.title }}
+  </h4>
 
   <article>
     <header class="container alert alert-light border mx-0 mb-4">
@@ -106,12 +114,24 @@ export default {
         </li>
       </ul>
     </section>
+    <footer>
+      <button
+        class="btn btn-light border"
+        @click="this.$router.push(`/recipes/${this.recipe.id}/edit`)"
+      >
+        Modifier
+      </button>
+    </footer>
   </article>
 </template>
 
-<style>
+<style scoped>
 header,
 article {
   width: fit-content !important;
+}
+
+.back-icon {
+  cursor: pointer;
 }
 </style>

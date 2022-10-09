@@ -13,6 +13,8 @@ import {
   faPizzaSlice,
   faBook,
   faCheckSquare,
+  faTrashCan,
+  faAngleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -30,6 +32,8 @@ library.add(faFireFlameCurved);
 library.add(faPizzaSlice);
 library.add(faBook);
 library.add(faCheckSquare);
+library.add(faTrashCan);
+library.add(faAngleLeft);
 
 const app = createApp(App);
 

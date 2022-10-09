@@ -33,7 +33,7 @@ export default {
     >
       <div class="card-body">
         <router-link
-          :to="{ name: 'recipe-details', params: { id: recipe.id } }"
+          :to="{ name: 'recipe-details', params: { id: recipe.id } }" class="link-dark"
         >
           {{ recipe.title }}
         </router-link>

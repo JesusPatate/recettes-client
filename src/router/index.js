@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import RecipeListView from "../views/RecipeListView.vue";
 import RecipeDetailsView from "../views/RecipeDetailsView.vue";
 import NewRecipeView from "../views/NewRecipeView.vue";
+import EditRecipeView from "../views/EditRecipeView.vue";
 
 const router = createRouter({
   //history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,9 +19,14 @@ const router = createRouter({
       component: RecipeDetailsView,
     },
     {
-      path: "/new",
+      path: "/recipes/new",
       name: "new-recipe",
       component: NewRecipeView,
+    },
+    {
+      path: "/recipes/:id/edit",
+      name: "edit-recipe",
+      component: EditRecipeView,
     },
   ],
 });

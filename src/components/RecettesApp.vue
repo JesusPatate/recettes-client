@@ -13,10 +13,10 @@ export default {
     class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom"
   >
     <nav class="container-fluid d-flex px-4">
-      <router-link class="navbar-brand flex-grow-1 fw-bold" to="/">
+      <router-link to="/" class="navbar-brand flex-grow-1 fw-bold">
         Recettes
       </router-link>
-      <router-link to="/new">Nouvelle recette</router-link>
+      <router-link to="/recipes/new" class="link-dark">Nouvelle recette</router-link>
     </nav>
   </nav>
 

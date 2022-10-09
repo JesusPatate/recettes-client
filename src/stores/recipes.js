@@ -20,11 +20,8 @@ export const useRecipeStore = defineStore({
       return this.recipes.get(id);
     },
 
-    storeAll(recipes, override = false) {
-      if (override) {
-        this.recipes.clear();
-      }
-
+    storeAll(recipes) {
+      this.recipes.clear();
       recipes.forEach((recipe) => this.recipes.set(recipe.id, recipe));
     },
 

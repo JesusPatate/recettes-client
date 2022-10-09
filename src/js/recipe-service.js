@@ -38,9 +38,14 @@ export default {
     apiClient.getAllRecipes((recipes) => store.storeAll(recipes));
   },
 
+  get(recipeId) {
+    const store = getRecipeStore();
+    return store.get(recipeId);
+  },
+
   search(term) {
     const store = getRecipeStore();
-    apiClient.searchRecipes(term, (recipes) => store.storeAll(recipes, true));
+    apiClient.searchRecipes(term, (recipes) => store.storeAll(recipes));
   },
 
   add(recipeData, onSuccess = () => {}) {

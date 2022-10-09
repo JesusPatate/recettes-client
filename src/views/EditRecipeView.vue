@@ -7,5 +7,5 @@ export default {
 </script>
 
 <template>
-    <recipe-form></recipe-form>
+    <recipe-form :recipeId="$route.params.id"></recipe-form>
 </template>
