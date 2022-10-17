@@ -10,7 +10,7 @@ export default {
   },
 
   computed: {
-    // TODO : do not access store's state directly
+    // TODO: do not access store's state directly
     ...mapState(useRecipeStore, ["recipes", "size"]),
   },
 };
