@@ -40,7 +40,8 @@ export default {
       </div>
     </div>
   </div>
-  <div class="text-center text-muted">{{ size }} recettes affichées</div>
+  <!-- <div class="text-center text-muted">{{ size }} recettes affichées</div> -->
+  <div class="text-center text-muted">{{ $tc("recipe-list.foo", size) }}</div>
 </template>
 
 <style>

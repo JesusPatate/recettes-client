@@ -16,7 +16,9 @@ export default {
       <router-link to="/" class="navbar-brand flex-grow-1 fw-bold">
         Recettes
       </router-link>
-      <router-link to="/recipes/new" class="link-dark">Nouvelle recette</router-link>
+      <router-link to="/recipes/new" class="link-dark">
+        {{ $t("navbar.new-recipe") }}
+      </router-link>
     </nav>
   </nav>
 
