@@ -48,13 +48,17 @@ export default {
     apiClient.searchRecipes(term, (recipes) => store.storeAll(recipes));
   },
 
-  add(recipeData, onSuccess = () => {}) {
+  add(recipeData, onSuccess = () => {}, onError = () => {}) {
     const store = getRecipeStore();
     const recipe = toRecipe(recipeData);
-    apiClient.saveRecipe(recipe, () => {
-      store.store(recipe);
-      onSuccess();
-    });
+    apiClient.saveRecipe(
+      recipe,
+      () => {
+        store.store(recipe);
+        onSuccess(recipe);
+      },
+      onError
+    );
   },
 
   delete(recipeId, onSuccess = () => {}) {

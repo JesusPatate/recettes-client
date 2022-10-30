@@ -99,7 +99,7 @@ export default {
       });
   },
 
-  saveRecipe(recipe, onSuccess = () => {}) {
+  saveRecipe(recipe, onSuccess = () => {}, onError = () => {}) {
     console.debug(`Sauvegarde de la recette "${recipe.title}"...`);
 
     const data = fromRecipe(recipe);
@@ -121,6 +121,8 @@ export default {
         } else {
           console.error(`Sauvegarde échouée : ${error.message}`);
         }
+        
+        onError(error);
       });
   },
 
